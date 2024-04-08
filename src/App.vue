@@ -1,11 +1,7 @@
 <template>
-  <div>
-    <HomeLayout></HomeLayout>
-  </div>
+  <RouterView></RouterView>
 </template>
 
-<script setup>
-import HomeLayout from './layouts/HomeLayout.vue'
-</script>
+<script setup></script>
 
 <style scoped></style>

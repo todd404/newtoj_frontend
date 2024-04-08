@@ -17,18 +17,36 @@
           </ElTabPane>
         </ElTabs>
       </ElCol>
-      <ElCol :span="1"> </ElCol>
+      <ElCol :span="1">
+        <HeaderAvatar :popover-disabled="!isLogin" @avatar-click="onAvatarClick"></HeaderAvatar>
+      </ElCol>
     </ElRow>
   </div>
+  <LoginDialog v-model="loginDialogOpen"></LoginDialog>
 </template>
 
 <script setup lang="ts">
-import type { TabPaneName } from 'element-plus'
-import { ref, watch } from 'vue'
+import { ElMessage, type TabPaneName } from 'element-plus'
+import { onMounted, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
+import HeaderAvatar from './HeaderAvatar.vue'
+import LoginDialog from './LoginDialog.vue'
+import { useUserInfoStore } from '@/stores/userInfoStore'
 
 const activeName = ref('')
+const loginDialogOpen = ref(false)
+const isLogin = ref(false)
 let route = useRouter()
+
+onMounted(() => {
+  const userInfoStore = useUserInfoStore()
+  if (userInfoStore.getToken.value) {
+    //已登录
+    isLogin.value = true
+  } else {
+    isLogin.value = false
+  }
+})
 
 watch(
   () => route.currentRoute.value,
@@ -40,7 +58,16 @@ watch(
 )
 
 const onTabChange = (name: TabPaneName) => {
-  route.push(name.toString())
+  route.push(`/${name.toString()}`)
+}
+
+const onAvatarClick = () => {
+  if (isLogin.value) {
+    //已登录
+    ElMessage('已登录')
+  } else {
+    loginDialogOpen.value = true
+  }
 }
 </script>
 

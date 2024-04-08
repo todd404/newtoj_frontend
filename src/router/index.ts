@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import ProblemsetView from '@/views/ProblemsetView.vue'
+import HomeLayout from '@/layouts/HomeLayout.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,17 +8,22 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: ProblemsetView,
+      component: HomeLayout,
       children: [
         {
           path: '/',
-          name: 'index',
+          name: 'home_problemset',
           component: () => import('@/views/ProblemsetView.vue')
         },
         {
           path: '/problemset',
           name: 'problemset',
           component: () => import('@/views/ProblemsetView.vue')
+        },
+        {
+          path: '/problem/:id',
+          name: 'problem',
+          component: () => import('@/views/ProblemView.vue')
         }
       ]
     }
