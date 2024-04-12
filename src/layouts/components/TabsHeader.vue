@@ -1,7 +1,30 @@
 <template>
   <div style="display: flex; align-items: center; justify-content: center">
     <ElRow class="bar" justify="center" align="middle">
-      <ElCol :span="1">logo</ElCol>
+      <ElCol :span="1"
+        ><svg
+          width="24"
+          height="24"
+          viewBox="0 0 48 48"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M44 24L4 4V44L44 24Z"
+            stroke="#81C7D4"
+            stroke-width="4"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M4 24L44 44V4L4 24Z"
+            stroke="#81C7D4"
+            stroke-width="4"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </ElCol>
       <ElCol style="flex-grow: 1" :span="22">
         <ElTabs v-model="activeName" class="nav-tabs" @tab-change="onTabChange">
           <ElTabPane name="problemset">

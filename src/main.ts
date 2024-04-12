@@ -10,7 +10,7 @@ import 'element-plus/dist/index.css'
 import UndrawUi from 'undraw-ui'
 import 'undraw-ui/dist/style.css'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
-import RefreshToken from './functions/RefreshToken'
+import { RefreshToken } from './functions/UserFuntions'
 
 const app = createApp(App)
 

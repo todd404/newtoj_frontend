@@ -20,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-import RefreshToken from '@/functions/RefreshToken'
+import { RefreshToken } from '@/functions/UserFuntions'
 import { useUserInfoStore } from '@/stores/userInfoStore'
 import axios from 'axios'
 import {

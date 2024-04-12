@@ -1,22 +1,42 @@
 <template>
+  <ElSelect v-model="language" style="width: 100px" size="small">
+    <ElOption label="C++" value="cpp" />
+    <ElOption label="Java" value="java" />
+  </ElSelect>
+  <ElDivider style="margin: 0"></ElDivider>
   <Codemirror
     v-model="code"
     :autofocus="true"
     :indent-with-tab="true"
     :tab-size="4"
     :extensions="extensions"
-    style="height: 100%"
+    style="flex-grow: 1"
   ></Codemirror>
+  <div style="width: 100%; height: 1.7rem; display: flex; justify-content: flex-end">
+    <div>
+      <ElButton size="small" plain>运行</ElButton>
+      <ElButton size="small" plain type="success" @click="$emit('submitCode')">提交</ElButton>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { Codemirror } from 'vue-codemirror'
-import { javascript } from '@codemirror/lang-javascript'
 import { oneDark } from '@codemirror/theme-one-dark'
+import { LanguageExtensions } from '@/functions/LanguageExtensions'
 
-const code = ref('console.log("hello, world")')
-const extensions = [javascript(), oneDark]
+const code = defineModel<string, string>('code')
+const language = defineModel<string, string>('langauge')
+const emit = defineEmits<{
+  (e: 'submitCode'): void
+}>()
+
+watch(language, (newLanguage) => {
+  if (newLanguage == undefined) return
+  extensions.value = [LanguageExtensions[newLanguage](), oneDark]
+})
+const extensions = ref()
 </script>
 
 <style scoped></style>

@@ -9,6 +9,10 @@ import { ElMessage } from 'element-plus'
 import { UComment, type ConfigApi, type SubmitParamApi } from 'undraw-ui'
 import { onMounted, reactive } from 'vue'
 
+const props = defineProps<{
+  problemId: string
+}>()
+
 const config = reactive<ConfigApi>({
   user: {
     id: 1,
@@ -24,8 +28,7 @@ const config = reactive<ConfigApi>({
 })
 
 const refreshComments = async () => {
-  //TODO: 修改为路由参数的problemId
-  let comments = await getAllComments('1')
+  let comments = await getAllComments(props.problemId)
   config.comments = comments
 }
 
@@ -35,8 +38,12 @@ onMounted(() => {
 
 // 提交评论事件
 const submit = async ({ content, parentId, files, finish }: SubmitParamApi) => {
-  //TODO: 修改为路由参数的problemId
-  let comment = await submitComment({ uid: config.user.id, problemId: '1', parentId, content })
+  let comment = await submitComment({
+    uid: config.user.id,
+    problemId: props.problemId,
+    parentId,
+    content
+  })
 
   finish(comment)
   ElMessage({ type: 'success', message: '评论成功' })

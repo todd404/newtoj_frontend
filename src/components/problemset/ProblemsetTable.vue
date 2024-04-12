@@ -67,7 +67,7 @@ const tableData = ref<tableItem[]>([])
 
 const getProblemSet = async () => {
   let res = await axios.get(
-    'http://192.168.31.14:10393/mock/9e9ed3f6-20a8-4c4f-8fa7-6181902f7308/api/problemset'
+    'http://localhost:10393/mock/9e9ed3f6-20a8-4c4f-8fa7-6181902f7308/api/problemset'
   )
   problemsetData.value = res.data.problemset
   loading.value = false
