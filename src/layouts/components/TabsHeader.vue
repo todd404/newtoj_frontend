@@ -25,7 +25,7 @@
           />
         </svg>
       </ElCol>
-      <ElCol style="flex-grow: 1" :span="22">
+      <ElCol style="flex-grow: 1" :span="20">
         <ElTabs v-model="activeName" class="nav-tabs" @tab-change="onTabChange">
           <ElTabPane name="problemset">
             <template #label>
@@ -39,6 +39,9 @@
             </template>
           </ElTabPane>
         </ElTabs>
+      </ElCol>
+      <ElCol :span="1">
+        <WhisperBox />
       </ElCol>
       <ElCol :span="1">
         <HeaderAvatar :popover-disabled="!isLogin" @avatar-click="onAvatarClick"></HeaderAvatar>
@@ -55,6 +58,7 @@ import { useRouter } from 'vue-router'
 import HeaderAvatar from './HeaderAvatar.vue'
 import LoginDialog from './LoginDialog.vue'
 import { useUserInfoStore } from '@/stores/userInfoStore'
+import WhisperBox from './WhisperBox.vue'
 
 const activeName = ref('')
 const loginDialogOpen = ref(false)

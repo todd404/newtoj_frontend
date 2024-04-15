@@ -2,6 +2,13 @@
   <RouterView></RouterView>
 </template>
 
-<script setup></script>
+<script setup lang="ts">
+import { onMounted } from 'vue'
+import { refreshUserInfo } from './functions/UserFuntions'
+
+onMounted(() => {
+  refreshUserInfo()
+})
+</script>
 
 <style scoped></style>

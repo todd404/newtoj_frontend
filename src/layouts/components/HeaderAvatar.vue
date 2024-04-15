@@ -5,7 +5,7 @@
       <ElAvatar
         @click.prevent="$emit('avatarClick')"
         class="header-avatar"
-        src="https://avatars.githubusercontent.com/u/72015883?v=4"
+        :src="userInfoStore.getUserInfo.value?.avatar"
       >
       </ElAvatar>
     </template>
@@ -20,6 +20,8 @@ defineProps({
   popoverDisabled: Boolean
 })
 
+const userInfoStore = useUserInfoStore()
+
 const logout = async () => {
   let res = await axios.get('/api/logout')
   let body = res.data
@@ -30,8 +32,8 @@ const logout = async () => {
       type: 'success'
     })
 
-    const userInfoStore = useUserInfoStore()
     userInfoStore.deleteToken()
+    userInfoStore.deleteUserInfo()
   } else {
     ElMessage({
       message: '退出失败',

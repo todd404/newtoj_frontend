@@ -1,4 +1,5 @@
 import '../src/assets/main.css'
+import '@/assets/base.css'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
@@ -10,7 +11,7 @@ import 'element-plus/dist/index.css'
 import UndrawUi from 'undraw-ui'
 import 'undraw-ui/dist/style.css'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
-import { RefreshToken } from './functions/UserFuntions'
+import { refreshAxiosToken } from './functions/UserFuntions'
 
 const app = createApp(App)
 
@@ -25,6 +26,6 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
 }
 
-RefreshToken()
+refreshAxiosToken()
 
 app.mount('#app')

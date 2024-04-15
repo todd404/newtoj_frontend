@@ -20,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-import { RefreshToken } from '@/functions/UserFuntions'
+import { refreshAxiosToken } from '@/functions/UserFuntions'
 import { useUserInfoStore } from '@/stores/userInfoStore'
 import axios from 'axios'
 import {
@@ -67,7 +67,7 @@ const submitLoginForm = async () => {
     const userinfoStore = useUserInfoStore()
     userinfoStore.setToken(token)
 
-    RefreshToken()
+    refreshAxiosToken()
 
     dialogOpen.value = false
   } else {
