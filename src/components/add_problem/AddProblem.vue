@@ -135,14 +135,17 @@ const canSubmit = computed<boolean>(() => {
   totalScore += autoCaseConfig.value.basicScore
   for (let c of specialCaseList.value) {
     totalScore += c.score
-    for (let cc of c.perArgCases) {
-      if (!cc.caseValidatePassed) return false
-    }
   }
   if (totalScore != 100) return false
 
   if (caseUploadedFile.value == '') {
     if (autoCaseConfig.value.count <= 0) return false
+
+    for (let c of specialCaseList.value) {
+      for (let cc of c.perArgCases) {
+        if (!cc.caseValidatePassed) return false
+      }
+    }
 
     for (let i = 0; i < problemArgs.value.length; i++) {
       const argConfig: AutoCaseArgConfig = autoCaseConfig.value.autoCaseArgConfigList[i]
