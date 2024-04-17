@@ -8,10 +8,12 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     AddProblem: typeof import('./src/components/add_problem/AddProblem.vue')['default']
+    AddProblemAnswer: typeof import('./src/components/add_problem/AddProblemAnswer.vue')['default']
     AddProblemArgs: typeof import('./src/components/add_problem/AddProblemArgs.vue')['default']
     AddProblemCase: typeof import('./src/components/add_problem/AddProblemCase.vue')['default']
     AddProblemCaseTypeForm: typeof import('./src/components/add_problem/AddProblemCaseTypeForm.vue')['default']
     AddProblemContent: typeof import('./src/components/add_problem/AddProblemContent.vue')['default']
+    AddProblemTags: typeof import('./src/components/add_problem/AddProblemTags.vue')['default']
     ChatMessage: typeof import('./src/components/WhisperDialog/ChatMessage.vue')['default']
     ChatView: typeof import('./src/components/WhisperDialog/ChatView.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
@@ -48,7 +50,9 @@ declare module 'vue' {
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
     ElTabPane: typeof import('element-plus/es')['ElTabPane']
     ElTabs: typeof import('element-plus/es')['ElTabs']
+    ElTag: typeof import('element-plus/es')['ElTag']
     ElText: typeof import('element-plus/es')['ElText']
+    ElTooltip: typeof import('element-plus/es')['ElTooltip']
     ElUpload: typeof import('element-plus/es')['ElUpload']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     IconCommunity: typeof import('./src/components/icons/IconCommunity.vue')['default']
