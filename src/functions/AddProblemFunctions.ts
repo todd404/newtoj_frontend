@@ -55,3 +55,14 @@ export async function addProblem(addProblemConfig: AddProblemConfig): Promise<Re
   const data = res.data
   return data
 }
+
+export interface RunReport {
+  statusCode: number
+  msg: string
+}
+
+export async function queryAddProblemStatus(uuid: string): Promise<RunReport> {
+  const res = await axios.get(`/api/query-add-problem-status`, { params: { uuid } })
+  const body: ResponseResult = res.data
+  return body.data
+}

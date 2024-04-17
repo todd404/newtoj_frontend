@@ -66,10 +66,8 @@ const currentPage = ref(0)
 const tableData = ref<tableItem[]>([])
 
 const getProblemSet = async () => {
-  let res = await axios.get(
-    'http://localhost:10393/mock/9e9ed3f6-20a8-4c4f-8fa7-6181902f7308/api/problemset'
-  )
-  problemsetData.value = res.data.problemset
+  let res = await axios.get('/api/problemset')
+  problemsetData.value = res.data.data
   loading.value = false
 }
 

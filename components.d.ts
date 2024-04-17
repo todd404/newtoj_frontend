@@ -13,6 +13,7 @@ declare module 'vue' {
     AddProblemCase: typeof import('./src/components/add_problem/AddProblemCase.vue')['default']
     AddProblemCaseTypeForm: typeof import('./src/components/add_problem/AddProblemCaseTypeForm.vue')['default']
     AddProblemContent: typeof import('./src/components/add_problem/AddProblemContent.vue')['default']
+    AddProblemStatusDrawer: typeof import('./src/components/add_problem/AddProblemStatusDrawer.vue')['default']
     AddProblemTags: typeof import('./src/components/add_problem/AddProblemTags.vue')['default']
     ChatMessage: typeof import('./src/components/WhisperDialog/ChatMessage.vue')['default']
     ChatView: typeof import('./src/components/WhisperDialog/ChatView.vue')['default']

@@ -17,7 +17,7 @@
           v-for="(t, index) of supportType"
           :key="`return-type-${index}`"
           :label="t"
-          value="t"
+          :value="t"
         />
       </ElSelect>
     </ElFormItem>
@@ -62,7 +62,7 @@
             v-for="(t, index) of supportType"
             :key="`arg-type-${index}`"
             :label="t"
-            value="t"
+            :value="t"
           />
         </ElSelect>
       </ElFormItem>
