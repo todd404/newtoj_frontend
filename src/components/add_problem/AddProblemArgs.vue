@@ -13,10 +13,12 @@
     </ElFormItem>
     <ElFormItem label="返回值类型">
       <ElSelect v-model="problemConfig.returnType" style="width: 10em">
-        <ElOption label="int" value="int"></ElOption>
-        <ElOption label="int[]" value="int[]"></ElOption>
-        <ElOption label="int[][]" value="int[][]"></ElOption>
-        <ElOption label="string" value="string"></ElOption>
+        <ElOption
+          v-for="(t, index) of supportType"
+          :key="`return-type-${index}`"
+          :label="t"
+          value="t"
+        />
       </ElSelect>
     </ElFormItem>
     <ElFormItem label="时间限制(s)">
@@ -56,10 +58,12 @@
       </ElFormItem>
       <ElFormItem label="参数类型">
         <ElSelect v-model="problemArgs[index].argType" style="width: 10em">
-          <ElOption label="int" value="int"></ElOption>
-          <ElOption label="int[]" value="int[]"></ElOption>
-          <ElOption label="int[][]" value="int[][]"></ElOption>
-          <ElOption label="string" value="string"></ElOption>
+          <ElOption
+            v-for="(t, index) of supportType"
+            :key="`arg-type-${index}`"
+            :label="t"
+            value="t"
+          />
         </ElSelect>
       </ElFormItem>
       <ElFormItem>
@@ -72,6 +76,7 @@
 <script setup lang="ts">
 import ValidateInput from '../ValidateInput.vue'
 import { Delete } from '@element-plus/icons-vue'
+import { supportType } from '@/functions/AddProblemFunctions'
 
 const problemConfig = defineModel<PRBConfig>('problemConfig', { required: true })
 const problemArgs = defineModel<ProblemArgs[]>('problemArgs', { required: true })
