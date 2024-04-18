@@ -12,11 +12,16 @@
 
             <ElMenuItem index="/admin/add-problem">
               <ElIcon> <Plus /> </ElIcon>
-              <span>添加问题</span>
+              <span>添加编程问题</span>
             </ElMenuItem>
             <ElMenuItem index="/admin/edit-problem">
               <ElIcon> <Edit /> </ElIcon>
-              <span>编辑问题</span>
+              <span>编辑编程问题</span>
+            </ElMenuItem>
+
+            <ElMenuItem index="/admin/add-choice-problem">
+              <ElIcon> <Plus /> </ElIcon>
+              <span>添加单选题集</span>
             </ElMenuItem>
           </ElSubMenu>
         </ElMenu>

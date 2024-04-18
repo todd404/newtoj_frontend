@@ -3,7 +3,7 @@
     <!-- Normal Code Blocks -->
     <!-- <div v-html="mdToHtml"></div> -->
     <!-- Add numbering to the Code Blocks -->
-    <div v-html="mdToHtml" class="standard"></div>
+    <div v-html="mdToHtml" class="markdown-body"></div>
   </div>
 </template>
 
@@ -13,6 +13,7 @@ import { Marked } from 'marked'
 import { markedHighlight } from 'marked-highlight'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/github-dark-dimmed.css'
+import '@/assets/markdown.css'
 
 const props = defineProps<{
   value: string
@@ -34,43 +35,4 @@ const mdToHtml = computed(() => {
 })
 </script>
 
-<style scoped>
-.standard h1 {
-  font-size: 2em;
-  font-weight: bold;
-  margin: 0.67em 0;
-}
-.standard h2 {
-  font-size: 1.5em;
-  font-weight: bold;
-  margin: 0.83em 0;
-}
-.standard h3 {
-  font-size: 1.17em;
-  font-weight: bold;
-  margin: 1em 0;
-}
-.standard p {
-  margin: 1em 0;
-}
-.standard ul,
-.standard ol {
-  display: block;
-  list-style-type: disc;
-  padding-left: 40px;
-  margin: 1em 0;
-}
-.standard ol {
-  list-style-type: decimal;
-}
-.standard li {
-  display: list-item;
-}
-.standard blockquote {
-  margin: 1em 40px;
-}
-.standard pre {
-  margin: 1em 0;
-  white-space: pre;
-}
-</style>
+<style scoped></style>

@@ -21,20 +21,23 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { Codemirror } from 'vue-codemirror'
 import { oneDark } from '@codemirror/theme-one-dark'
 import { LanguageExtensions } from '@/functions/LanguageExtensions'
 
 const code = defineModel<string, string>('code')
-const language = defineModel<string, string>('langauge')
+const language = defineModel<string, string>('langauge', { required: true })
 const emit = defineEmits<{
   (e: 'submitCode'): void
 }>()
 
 watch(language, (newLanguage) => {
-  if (newLanguage == undefined) return
   extensions.value = [LanguageExtensions[newLanguage](), oneDark]
+})
+
+onMounted(() => {
+  extensions.value = [LanguageExtensions[language.value](), oneDark]
 })
 const extensions = ref()
 </script>

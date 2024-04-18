@@ -1,21 +1,24 @@
 <template>
-  <splitpanes class="default-theme" style="height: 89vh; padding: 0 30px 0 30px">
-    <pane min-size="20" max-size="70">
-      <ProblemArea :problem-id="problemId"></ProblemArea>
-    </pane>
-    <pane>
-      <Splitpanes class="default-theme" horizontal>
-        <Pane size="70" style="display: flex; flex-direction: column">
-          <ProblemCodeEditor
-            v-model:code="code"
-            v-model:langauge="language"
-            @submit-code="onCodeSubmitClick"
-          ></ProblemCodeEditor>
-        </Pane>
-        <Pane></Pane>
-      </Splitpanes>
-    </pane>
-  </splitpanes>
+  <ElSkeleton animated :rows="8" :loading="loading">
+    <splitpanes class="default-theme" style="height: 89vh; padding: 0 30px 0 30px">
+      <pane min-size="20" max-size="70">
+        <ProblemArea :problem-id="problemId" :problem-content="problem?.content"></ProblemArea>
+      </pane>
+      <pane>
+        <Splitpanes class="default-theme" horizontal>
+          <Pane size="70" style="display: flex; flex-direction: column">
+            <ProblemCodeEditor
+              v-model:code="code"
+              v-model:langauge="language"
+              @submit-code="onCodeSubmitClick"
+            ></ProblemCodeEditor>
+          </Pane>
+          <Pane></Pane>
+        </Splitpanes>
+      </pane>
+    </splitpanes>
+  </ElSkeleton>
+
   <JudgeStatusDrawer v-model="statusDrawerOpen" :uuid="uuid"></JudgeStatusDrawer>
   <ElButton
     v-if="uuid"
@@ -35,15 +38,17 @@ import ProblemArea from '@/components/problem/ProblemArea.vue'
 import ProblemCodeEditor from '@/components/problem/ProblemCodeEditor.vue'
 import JudgeStatusDrawer from '@/components/problem/JudgeStatusDrawer.vue'
 import { submitJudge } from '@/functions/JudgeFuntions'
-import axios from 'axios'
 import { ElMessage } from 'element-plus'
 import { Splitpanes, Pane } from 'splitpanes'
 import 'splitpanes/dist/splitpanes.css'
 import { onBeforeMount, onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { ArrowLeft } from '@element-plus/icons-vue'
+import { getProblem, type Problem } from '@/functions/ProblemFunctions'
 
-const code = ref('')
+const problem = ref<Problem>()
+const loading = ref(true)
+const code = ref('cpp')
 const language = ref('')
 const route = useRoute()
 const problemId = ref()
@@ -87,6 +92,12 @@ const refreshSavedCode = () => {
   }
 }
 
+const getPRB = async () => {
+  problem.value = await getProblem(problemId.value)
+  refreshSavedCode()
+  loading.value = false
+}
+
 onMounted(() => {
   const lastLang = localStorage.getItem('last_language')
   if (lastLang == null) {
@@ -96,7 +107,7 @@ onMounted(() => {
     language.value = lastLang
   }
 
-  refreshSavedCode()
+  getPRB()
 })
 
 watch(language, (newLang) => {
