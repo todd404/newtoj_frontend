@@ -158,7 +158,7 @@ import type { ProblemArgs } from './AddProblemArgs.vue'
 import AddProblemCaseTypeForm from './AddProblemCaseTypeForm.vue'
 import { Plus } from '@element-plus/icons-vue'
 import { typeReg } from '@/functions/AddProblemFunctions'
-import ValidateInput from '../ValidateInput.vue'
+import ValidateInput from '@/components/ValidateInput.vue'
 import { useUserInfoStore } from '@/stores/userInfoStore'
 import { Delete } from '@element-plus/icons-vue'
 

@@ -74,7 +74,7 @@
 </template>
 
 <script setup lang="ts">
-import ValidateInput from '../ValidateInput.vue'
+import ValidateInput from '@/components/ValidateInput.vue'
 import { Delete } from '@element-plus/icons-vue'
 import { supportType } from '@/functions/AddProblemFunctions'
 
