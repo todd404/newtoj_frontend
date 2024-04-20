@@ -40,6 +40,7 @@
         </ElButton>
       </ElTooltip>
     </div>
+    <AddProblemStatusDrawer v-model="statusDrawerOpen" :uuid="uuid"></AddProblemStatusDrawer>
   </ElCollapse>
 </template>
 
@@ -64,6 +65,7 @@ import {
   type ProblemConfig,
   type ScoreConfig
 } from '@/functions/AddProblemFunctions'
+import AddProblemStatusDrawer from './AddProblemStatusDrawer.vue'
 
 const problemContent = reactive({
   title: '',
@@ -93,6 +95,9 @@ const problemTags = ref<string[]>([])
 const code = ref('')
 const language = ref('cpp')
 
+const uuid = ref('')
+const statusDrawerOpen = ref(false)
+
 watch(
   [problemConfig, problemArgs],
   ([newProblemConfig, newProblemArgs]) => {
@@ -100,10 +105,10 @@ watch(
     code.value = getCppCodeTemplate({
       functionName: newProblemConfig.functionName,
       returnType: newProblemConfig.returnType,
-      argumentTypes: newProblemArgs.map(({ argType }) => {
+      argumentTypeList: newProblemArgs.map(({ argType }) => {
         return argType
       }),
-      argumentNames: newProblemArgs.map(({ name }) => {
+      argumentNameList: newProblemArgs.map(({ name }) => {
         return name
       })
     })
@@ -219,7 +224,11 @@ const onAddProblemSubmitClick = async () => {
     problemTags: problemTags.value
   }
 
-  addProblem(addProblemConfig)
+  const result = await addProblem(addProblemConfig)
+  if (result.code == 200) {
+    uuid.value = result.data.uuid
+    statusDrawerOpen.value = true
+  }
 }
 </script>
 

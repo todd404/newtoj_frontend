@@ -10,11 +10,11 @@
     :indent-with-tab="true"
     :tab-size="4"
     :extensions="extensions"
-    style="flex-grow: 1"
+    style="flex-grow: 1; overflow-y: auto"
   ></Codemirror>
   <div style="width: 100%; height: 1.7rem; display: flex; justify-content: flex-end">
     <div>
-      <ElButton size="small" plain>运行</ElButton>
+      <ElButton size="small" plain @click="$emit('runCode')">运行</ElButton>
       <ElButton size="small" plain type="success" @click="$emit('submitCode')">提交</ElButton>
     </div>
   </div>
@@ -30,6 +30,7 @@ const code = defineModel<string, string>('code')
 const language = defineModel<string, string>('langauge', { required: true })
 const emit = defineEmits<{
   (e: 'submitCode'): void
+  (e: 'runCode'): void
 }>()
 
 watch(language, (newLanguage) => {

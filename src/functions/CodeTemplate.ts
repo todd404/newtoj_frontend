@@ -1,8 +1,8 @@
 interface ProblemConfig {
   functionName: string
   returnType: string
-  argumentTypes: string[]
-  argumentNames: string[]
+  argumentTypeList: string[]
+  argumentNameList: string[]
 }
 
 const cppTypeMap: { [key: string]: string } = {
@@ -20,12 +20,12 @@ const javaTypeMap: { [key: string]: string } = {
 export function getCppCodeTemplate(problemConfig: ProblemConfig) {
   const func: string = `${cppTypeMap[problemConfig.returnType]} ${problemConfig.functionName}`
   let args = ''
-  for (let i = 0; i < problemConfig.argumentTypes.length; i++) {
+  for (let i = 0; i < problemConfig.argumentTypeList.length; i++) {
     args =
       args +
-      cppTypeMap[problemConfig.argumentTypes[i]] +
+      cppTypeMap[problemConfig.argumentTypeList[i]] +
       ' ' +
-      problemConfig.argumentNames[i] +
+      problemConfig.argumentNameList[i] +
       ', '
   }
   args = args.slice(0, -2)

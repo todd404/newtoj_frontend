@@ -34,7 +34,6 @@
 
       <ElButton type="primary" @click="submitAlertDialogOpen = true"> 提交 </ElButton>
     </ElSpace>
-    <ChoiceProblem></ChoiceProblem>
   </div>
 
   <ElDialog v-model="submitAlertDialogOpen" title="确认" align-center>

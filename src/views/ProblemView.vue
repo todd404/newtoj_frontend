@@ -11,9 +11,12 @@
               v-model:code="code"
               v-model:langauge="language"
               @submit-code="onCodeSubmitClick"
+              @run-code="onRunCodeClick"
             ></ProblemCodeEditor>
           </Pane>
-          <Pane></Pane>
+          <Pane>
+            <ProblemRun v-model="runCaseList" :problem="problem" :uuid="runCaseUUID"></ProblemRun>
+          </Pane>
         </Splitpanes>
       </pane>
     </splitpanes>
@@ -37,14 +40,15 @@
 import ProblemArea from '@/components/problem/ProblemArea.vue'
 import ProblemCodeEditor from '@/components/problem/ProblemCodeEditor.vue'
 import JudgeStatusDrawer from '@/components/problem/JudgeStatusDrawer.vue'
-import { submitJudge } from '@/functions/JudgeFuntions'
-import { ElMessage } from 'element-plus'
+import { runForResult, submitJudge } from '@/functions/JudgeFuntions'
 import { Splitpanes, Pane } from 'splitpanes'
 import 'splitpanes/dist/splitpanes.css'
 import { onBeforeMount, onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { ArrowLeft } from '@element-plus/icons-vue'
-import { getProblem, type Problem } from '@/functions/ProblemFunctions'
+import { getCodeTamplate, getProblem, type Problem } from '@/functions/ProblemFunctions'
+import ProblemRun, { type RunCase } from '@/components/problem/ProblemRun.vue'
+import { showErrorMessge } from '@/functions/utils'
 
 const problem = ref<Problem>()
 const loading = ref(true)
@@ -52,6 +56,8 @@ const code = ref('cpp')
 const language = ref('')
 const route = useRoute()
 const problemId = ref()
+const runCaseList = ref<RunCase[]>([])
+const runCaseUUID = ref('')
 const statusDrawerOpen = ref(false)
 const uuid = ref('')
 
@@ -66,17 +72,20 @@ const onCodeSubmitClick = async () => {
     uuid.value = body.data.uuid
   } else {
     if (body.msg != null) {
-      ElMessage({
-        type: 'error',
-        message: `判题失败: ${body.msg}`
-      })
+      showErrorMessge(`判题失败: ${body.msg}`)
     } else {
-      ElMessage({
-        type: 'error',
-        message: '判题失败: 未知错误'
-      })
+      showErrorMessge(`判题失败: 未知原因`)
     }
   }
+}
+
+const onRunCodeClick = async () => {
+  runCaseUUID.value = await runForResult(
+    problemId.value,
+    language.value,
+    code.value,
+    runCaseList.value
+  )
 }
 
 onBeforeMount(() => {
@@ -86,7 +95,8 @@ onBeforeMount(() => {
 const refreshSavedCode = () => {
   const lastCode = localStorage.getItem(`${problemId.value}-${language.value}`)
   if (lastCode == null) {
-    //TODO: 使用模板
+    if (problem.value == undefined) return
+    code.value = getCodeTamplate[language.value](problem.value)
   } else {
     code.value = lastCode
   }

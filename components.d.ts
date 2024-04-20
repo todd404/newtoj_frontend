@@ -7,6 +7,8 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    AddChoiceProbem: typeof import('./src/components/admin/add_choice_problem/AddChoiceProbem.vue')['default']
+    AddChoiceProblem: typeof import('./src/components/admin/add_choice_problem/AddChoiceProblem.vue')['default']
     AddProblem: typeof import('./src/components/admin/add_problem/AddProblem.vue')['default']
     AddProblemAnswer: typeof import('./src/components/admin/add_problem/AddProblemAnswer.vue')['default']
     AddProblemArgs: typeof import('./src/components/admin/add_problem/AddProblemArgs.vue')['default']
@@ -20,6 +22,7 @@ declare module 'vue' {
     ChoiceProblem: typeof import('./src/components/exam/ChoiceProblem/ChoiceProblem.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
+    ElBacktop: typeof import('element-plus/es')['ElBacktop']
     ElBadge: typeof import('element-plus/es')['ElBadge']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElButtonGroup: typeof import('element-plus/es')['ElButtonGroup']
@@ -61,6 +64,7 @@ declare module 'vue' {
     ElText: typeof import('element-plus/es')['ElText']
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
     ElUpload: typeof import('element-plus/es')['ElUpload']
+    ExamProblem: typeof import('./src/components/exam/ExamProblem.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     IconCommunity: typeof import('./src/components/icons/IconCommunity.vue')['default']
     IconDocumentation: typeof import('./src/components/icons/IconDocumentation.vue')['default']
@@ -73,6 +77,8 @@ declare module 'vue' {
     ProblemCodeEditor: typeof import('./src/components/problem/ProblemCodeEditor.vue')['default']
     ProblemComment: typeof import('./src/components/problem/ProblemComment.vue')['default']
     ProblemContent: typeof import('./src/components/problem/ProblemContent.vue')['default']
+    ProblemPresenter: typeof import('./src/components/exam/ProblemPresenter.vue')['default']
+    ProblemRun: typeof import('./src/components/problem/ProblemRun.vue')['default']
     ProblemsetTable: typeof import('./src/components/problemset/ProblemsetTable.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

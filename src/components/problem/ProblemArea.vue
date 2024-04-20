@@ -1,5 +1,5 @@
 <template>
-  <ElTabs class="problem-tab" type="border-card" style="height: 100%; overflow-y: scroll">
+  <ElTabs class="problem-tab" type="border-card" style="height: 100%; overflow-y: auto">
     <ElTabPane label="问题详情">
       <ProblemContent :value="content"></ProblemContent>
     </ElTabPane>

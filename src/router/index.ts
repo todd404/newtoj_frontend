@@ -42,6 +42,11 @@ const router = createRouter({
           path: 'add-problem',
           name: 'add_problem',
           component: () => import('@/components/admin/add_problem/AddProblem.vue')
+        },
+        {
+          path: 'add-choice-problem',
+          name: 'add-choice-problem',
+          component: () => import('@/components/admin/add_choice_problem/AddChoiceProblem.vue')
         }
       ]
     }
