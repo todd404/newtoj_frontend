@@ -33,9 +33,21 @@
             </template>
           </ElTabPane>
 
-          <ElTabPane name="test" class="my-tab">
+          <ElTabPane name="exam" class="my-tab">
             <template #label>
               <span style="font-size: medium"> 测试 </span>
+            </template>
+          </ElTabPane>
+
+          <ElTabPane name="course" class="my-tab">
+            <template #label>
+              <span style="font-size: medium"> 学习 </span>
+            </template>
+          </ElTabPane>
+
+          <ElTabPane name="job" class="my-tab">
+            <template #label>
+              <span style="font-size: medium"> 招聘 </span>
             </template>
           </ElTabPane>
         </ElTabs>

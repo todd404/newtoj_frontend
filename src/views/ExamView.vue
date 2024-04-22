@@ -11,10 +11,12 @@
   >
     <ElSpace style="width: 100%; align-items: center">
       <ElSteps align-center style="width: 70vw" :active="currentProblem">
-        <ElStep title="选择题"></ElStep>
-        <ElStep title="编程题1"></ElStep>
-        <ElStep title="编程题2"></ElStep>
-        <ElStep title="编程题3"></ElStep>
+        <ElStep
+          v-for="(problem, index) of problemList"
+          :key="`step-${index}`"
+          :title="`${index + 1}. ${problem.type == 'program' ? '编程题' : '选择题'}`"
+        >
+        </ElStep>
       </ElSteps>
 
       <ElButtonGroup>
@@ -34,6 +36,10 @@
 
       <ElButton type="primary" @click="submitAlertDialogOpen = true"> 提交 </ElButton>
     </ElSpace>
+    <ExamProblem
+      :type="problemList[currentProblem].type"
+      :problem-id="problemList[currentProblem].problemId"
+    ></ExamProblem>
   </div>
 
   <ElDialog v-model="submitAlertDialogOpen" title="确认" align-center>
@@ -48,12 +54,27 @@
 </template>
 
 <script setup lang="ts">
-import ChoiceProblem from '@/components/exam/ChoiceProblem/ChoiceProblem.vue'
+import ExamProblem from '@/components/exam/ExamProblem.vue'
 import { ArrowLeft, ArrowRight } from '@element-plus/icons-vue'
 import { ref } from 'vue'
 
+export interface ExamProblemItem {
+  type: string
+  problemId: string
+}
+
 const currentProblem = ref(0)
 const submitAlertDialogOpen = ref(false)
+const problemList = ref<ExamProblemItem[]>([
+  {
+    type: 'choice',
+    problemId: '1'
+  },
+  {
+    type: 'program',
+    problemId: '1'
+  }
+])
 
 const onProblemPlusClick = () => {
   if (currentProblem.value >= 4) return

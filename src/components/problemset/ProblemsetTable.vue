@@ -3,7 +3,7 @@
     <ElTable v-loading="loading" :data="tableData" size="large" style="width: 80%">
       <ElTableColumn label="状态" width="80">
         <template #default="scope">
-          <ElIcon color="green" v-if="scope.row.state">
+          <ElIcon color="green" v-if="scope.row.passed">
             <Check />
           </ElIcon>
         </template>
@@ -17,8 +17,8 @@
 
       <ElTableColumn label="通过率" width="160">
         <template #default="scope">
-          <ElText :type="getAcceptanceRateColor(scope.row.acceptance_rate)">
-            {{ `${scope.row.acceptance_rate}%` }}</ElText
+          <ElText :type="getAcceptanceRateColor(scope.row.passingRate)">
+            {{ `${scope.row.passingRate}%` }}</ElText
           >
         </template>
       </ElTableColumn>
@@ -50,9 +50,9 @@ import { onMounted, ref, watch } from 'vue'
 
 interface tableItem {
   id: number
-  state: boolean
+  passed: boolean
   title: string
-  acceptance_rate: number
+  passingRate: string
   difficulty: number
   tags: string[]
 }

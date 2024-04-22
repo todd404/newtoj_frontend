@@ -106,8 +106,12 @@
     <template v-if="!autoCaseMode">
       <ElUpload
         action="/api/upload"
+        ref="upload"
+        :limit="1"
         :headers="{ Authorization: `Bearer ${userInfoStore.getToken.value}` }"
+        :on-exceed="handleExceed"
         :on-success="onUploadSuccess"
+        accept=".txt"
       >
         <template #trigger>
           <ElButton type="primary">上传测试用例</ElButton>
@@ -161,17 +165,25 @@ import { typeReg } from '@/functions/AddProblemFunctions'
 import ValidateInput from '@/components/ValidateInput.vue'
 import { useUserInfoStore } from '@/stores/userInfoStore'
 import { Delete } from '@element-plus/icons-vue'
+import type { UploadInstance, UploadRawFile, UploadProps } from 'element-plus'
 
 const userInfoStore = useUserInfoStore()
 
 const autoCaseMode = ref(true)
 const caseUploadedFile = defineModel<string>('caseUploadFile', { required: true })
+const upload = ref<UploadInstance>()
 const autoCaseConfig = defineModel<AutoCaseConfig>('autoCaseConfig', { required: true })
 const specialCaseList = defineModel<SpecialCase[]>('specialCaseList', { required: true })
 const canAutoCase = ref(true)
 const props = defineProps<{
   problemArgs: ProblemArgs[]
 }>()
+
+const handleExceed: UploadProps['onExceed'] = (files) => {
+  upload.value!.clearFiles()
+  const file = files[0] as UploadRawFile
+  upload.value!.handleStart(file)
+}
 
 const onUploadSuccess = (res: { code: number; data: { savedFileName: string } }) => {
   caseUploadedFile.value = res.code == 200 ? res.data.savedFileName : ''

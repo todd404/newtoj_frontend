@@ -5,9 +5,12 @@
 <script setup lang="ts">
 import emoji from '@/assets/emoji'
 import { getAllComments, likeComment, submitComment } from '@/functions/CommentFunctions'
+import { useUserInfoStore } from '@/stores/userInfoStore'
 import { ElMessage } from 'element-plus'
 import { UComment, type ConfigApi, type SubmitParamApi } from 'undraw-ui'
 import { onMounted, reactive } from 'vue'
+
+const userInfoStore = useUserInfoStore()
 
 const props = defineProps<{
   problemId: string
@@ -16,10 +19,10 @@ const props = defineProps<{
 const config = reactive<ConfigApi>({
   user: {
     id: 1,
-    username: 'jack',
+    username: '未登录',
     avatar:
       'https://static.juzicon.com/avatars/avatar-200602130320-HMR2.jpeg?x-oss-process=image/resize,w_100',
-    likeIds: [1, 2, 3]
+    likeIds: []
   },
   showAddress: false,
   showLevel: false,

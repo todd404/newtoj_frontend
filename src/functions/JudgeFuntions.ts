@@ -7,6 +7,8 @@ interface JudgeConfig {
   problemId: string | any
   language: string
   code: string
+  type: 'normal' | 'exam' | 'competition'
+  forUUID: string
 }
 
 interface JudgeResponse extends ResponseResult {

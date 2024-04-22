@@ -3,8 +3,8 @@
     <ElContainer>
       <ElAside>
         <h5 class="admin-menu-title">Toj Admin</h5>
-        <ElMenu router :default-active="$route.path">
-          <ElSubMenu index="problem" style="height: 100vh">
+        <ElMenu router :default-active="$route.path" style="height: 100vh">
+          <ElSubMenu index="problem">
             <template #title>
               <ElIcon> <Memo /> </ElIcon>
               <span>问题管理</span>
@@ -23,6 +23,28 @@
               <ElIcon> <Plus /> </ElIcon>
               <span>添加单选题集</span>
             </ElMenuItem>
+
+            <ElMenuItem index="/admin/edit-choice-problem">
+              <ElIcon> <Edit /> </ElIcon>
+              <span>编辑单选题集</span>
+            </ElMenuItem>
+          </ElSubMenu>
+
+          <ElSubMenu index="course">
+            <template #title>
+              <ElIcon><DataBoard /></ElIcon>
+              <span>课程管理</span>
+            </template>
+
+            <ElMenuItem index="/admin/add-course">
+              <ElIcon> <Plus /> </ElIcon>
+              <span>添加课程</span>
+            </ElMenuItem>
+
+            <ElMenuItem index="/admin/edit-course">
+              <ElIcon> <Edit /> </ElIcon>
+              <span>编辑课程</span>
+            </ElMenuItem>
           </ElSubMenu>
         </ElMenu>
       </ElAside>
@@ -36,7 +58,7 @@
 </template>
 
 <script setup lang="ts">
-import { Memo, Plus, Edit } from '@element-plus/icons-vue'
+import { Memo, Plus, Edit, DataBoard } from '@element-plus/icons-vue'
 </script>
 
 <style scoped>

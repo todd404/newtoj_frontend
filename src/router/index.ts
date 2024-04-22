@@ -27,6 +27,16 @@ const router = createRouter({
           component: () => import('@/views/ProblemView.vue')
         },
         {
+          path: 'course',
+          name: 'course',
+          component: () => import('@/views/CourseView.vue')
+        },
+        {
+          path: 'learn/:id',
+          name: 'learn',
+          component: () => import('@/views/LearnView.vue')
+        },
+        {
           path: 'exam/:id',
           name: 'exam',
           component: () => import('@/views/ExamView.vue')
@@ -47,6 +57,16 @@ const router = createRouter({
           path: 'add-choice-problem',
           name: 'add-choice-problem',
           component: () => import('@/components/admin/add_choice_problem/AddChoiceProblem.vue')
+        },
+        {
+          path: 'add-course',
+          name: 'add_course',
+          component: () => import('@/components/admin/course/AddCourse.vue')
+        },
+        {
+          path: 'edit-course',
+          name: 'edit_course',
+          component: () => import('@/components/admin/course/EditCourse.vue')
         }
       ]
     }

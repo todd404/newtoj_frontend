@@ -49,6 +49,9 @@ import { ArrowLeft } from '@element-plus/icons-vue'
 import { getCodeTamplate, getProblem, type Problem } from '@/functions/ProblemFunctions'
 import ProblemRun, { type RunCase } from '@/components/problem/ProblemRun.vue'
 import { showErrorMessge } from '@/functions/utils'
+import { useUserInfoStore } from '@/stores/userInfoStore'
+
+const userInfoStore = useUserInfoStore()
 
 const problem = ref<Problem>()
 const loading = ref(true)
@@ -62,10 +65,17 @@ const statusDrawerOpen = ref(false)
 const uuid = ref('')
 
 const onCodeSubmitClick = async () => {
+  if (userInfoStore.getUserInfo.value == undefined) {
+    showErrorMessge('未登录')
+    return
+  }
+
   let body = await submitJudge({
     problemId: problemId.value,
     language: language.value,
-    code: code.value
+    code: code.value,
+    type: 'normal',
+    forUUID: userInfoStore.getUserInfo.value?.userId.toString()
   })
 
   if (body.code == 200) {
