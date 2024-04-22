@@ -6,6 +6,9 @@
     <ElTabPane label="评论">
       <ProblemComment :problem-id="$props.problemId"></ProblemComment>
     </ElTabPane>
+    <ElTabPane label="判题历史">
+      <JudgeHistoryTable :problem-id="$props.problemId"></JudgeHistoryTable>
+    </ElTabPane>
   </ElTabs>
 </template>
 
@@ -14,6 +17,7 @@ import ProblemContent from './ProblemContent.vue'
 import ProblemComment from './ProblemComment.vue'
 import '@/assets/problem_tab.css'
 import { computed } from 'vue'
+import JudgeHistoryTable from './JudgeHistoryTable.vue'
 
 const props = defineProps<{ problemId: string; problemContent: string | undefined }>()
 const content = computed(() => {
