@@ -35,7 +35,7 @@ onMounted(() => {
 })
 
 const getChoiceProblemList = async () => {
-  const res = await axios.get(`/api/choice-problem-list`, {
+  const res = await axios.get(`/api/choice-problem`, {
     params: { problemId: props.problemId }
   })
 

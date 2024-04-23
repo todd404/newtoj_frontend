@@ -55,8 +55,13 @@ const router = createRouter({
         },
         {
           path: 'add-choice-problem',
-          name: 'add-choice-problem',
+          name: 'add_choice_problem',
           component: () => import('@/components/admin/add_choice_problem/AddChoiceProblem.vue')
+        },
+        {
+          path: 'add-exam',
+          name: 'add_exam',
+          component: () => import('@/components/admin/exam/AddExam.vue')
         },
         {
           path: 'add-course',

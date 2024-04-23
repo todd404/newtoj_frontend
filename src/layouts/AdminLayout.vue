@@ -23,10 +23,17 @@
               <ElIcon> <Plus /> </ElIcon>
               <span>添加单选题集</span>
             </ElMenuItem>
+          </ElSubMenu>
 
-            <ElMenuItem index="/admin/edit-choice-problem">
-              <ElIcon> <Edit /> </ElIcon>
-              <span>编辑单选题集</span>
+          <ElSubMenu index="exam">
+            <template #title>
+              <ElIcon><DocumentCopy /></ElIcon>
+              <span>测验管理</span>
+            </template>
+
+            <ElMenuItem index="/admin/add-exam">
+              <ElIcon> <Plus /> </ElIcon>
+              <span>添加测验</span>
             </ElMenuItem>
           </ElSubMenu>
 
@@ -58,7 +65,7 @@
 </template>
 
 <script setup lang="ts">
-import { Memo, Plus, Edit, DataBoard } from '@element-plus/icons-vue'
+import { Memo, Plus, Edit, DataBoard, DocumentCopy } from '@element-plus/icons-vue'
 </script>
 
 <style scoped>
