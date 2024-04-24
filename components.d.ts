@@ -23,6 +23,8 @@ declare module 'vue' {
     ChatView: typeof import('./src/components/WhisperDialog/ChatView.vue')['default']
     ChoiceProblem: typeof import('./src/components/exam/ChoiceProblem/ChoiceProblem.vue')['default']
     EditCourse: typeof import('./src/components/admin/course/EditCourse.vue')['default']
+    EditCourseExamDialog: typeof import('./src/components/admin/course/EditCourseExamDialog.vue')['default']
+    EditCourseFileDialog: typeof import('./src/components/admin/course/EditCourseFileDialog.vue')['default']
     EditExamDialog: typeof import('./src/components/admin/course/EditExamDialog.vue')['default']
     EditFileDialog: typeof import('./src/components/admin/course/EditFileDialog.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']

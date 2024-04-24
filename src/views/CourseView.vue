@@ -5,7 +5,7 @@
       <ElCard class="course-card" @click="$router.push(`/learn/${c.id}`)">
         <div style="display: flex; flex-direction: column; justify-items: center">
           <img height="152px" :src="`http://localhost/file/cover/course/${c.id}.jpg`" />
-          <ElText>算法训练营</ElText>
+          <ElText>{{ c.title }}</ElText>
         </div>
       </ElCard>
     </tamplate>
