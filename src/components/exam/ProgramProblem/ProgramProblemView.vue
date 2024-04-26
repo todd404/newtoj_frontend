@@ -35,8 +35,9 @@ import { onMounted, ref } from 'vue'
 import { getCodeTamplate, getProblem, type Problem } from '@/functions/ProblemFunctions'
 import ProblemRun, { type RunCase } from '@/components/problem/ProblemRun.vue'
 import ProgramProblemArea from './ProgramProblemArea.vue'
+import { showErrorMessge, showSuccessMessge } from '@/functions/utils'
 
-const props = defineProps<{ problemId: string }>()
+const props = defineProps<{ problemId: string; examUUID: string }>()
 
 const problem = ref<Problem>()
 const loading = ref(true)
@@ -49,8 +50,16 @@ const onCodeSubmitClick = async () => {
   let body = await submitJudge({
     problemId: props.problemId,
     language: language.value,
-    code: code.value
+    code: code.value,
+    type: 'exam',
+    forUUID: props.examUUID
   })
+
+  if (body.code != 200) {
+    showErrorMessge('提交失败')
+  } else {
+    showSuccessMessge('提交成功')
+  }
 }
 
 const onRunCodeClick = async () => {

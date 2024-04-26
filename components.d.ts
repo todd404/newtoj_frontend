@@ -27,6 +27,7 @@ declare module 'vue' {
     EditCourseFileDialog: typeof import('./src/components/admin/course/EditCourseFileDialog.vue')['default']
     EditExamDialog: typeof import('./src/components/admin/course/EditExamDialog.vue')['default']
     EditFileDialog: typeof import('./src/components/admin/course/EditFileDialog.vue')['default']
+    ElAlert: typeof import('element-plus/es')['ElAlert']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElBacktop: typeof import('element-plus/es')['ElBacktop']

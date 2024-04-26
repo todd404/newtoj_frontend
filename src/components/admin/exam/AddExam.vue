@@ -107,7 +107,7 @@ import axios from 'axios'
 import { computed, onMounted, reactive, ref } from 'vue'
 
 interface ExamItem {
-  id: number
+  problemId: number
   type: string
   title: string
   score: number
@@ -221,7 +221,7 @@ const handleProgramProblemPlusClick = (id: number) => {
   programProblemList.value = programProblemList.value.filter((v) => v.id != id)
 
   examConfig.examItemList.push({
-    id,
+    problemId: id,
     type: 'program',
     title,
     score: 0,
@@ -240,7 +240,7 @@ const handleChoiceProblemPlusClick = (id: number) => {
   choiceProblemList.value = choiceProblemList.value.filter((v) => v.id != id)
 
   examConfig.examItemList.push({
-    id,
+    problemId: id,
     type: 'choice',
     title,
     score: 0
@@ -255,7 +255,7 @@ const hanleExamItemDeleteClick = (index: number) => {
           v.ownerId = ''
         }
         const pushItem = {
-          id: v.id,
+          id: v.problemId,
           title: v.title,
           ownerId: v.ownerId
         }
@@ -265,7 +265,7 @@ const hanleExamItemDeleteClick = (index: number) => {
         programProblemList.value = programProblemList.value.sort((a, b) => a.id - b.id)
       } else if (v.type == 'choice') {
         const pushItem = {
-          id: v.id,
+          id: v.problemId,
           title: v.title
         }
         rawChoiceProblemList.push(pushItem)
