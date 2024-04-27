@@ -53,6 +53,23 @@
               <span>编辑课程</span>
             </ElMenuItem>
           </ElSubMenu>
+
+          <ElSubMenu index="job">
+            <template #title>
+              <ElIcon><OfficeBuilding /></ElIcon>
+              <span>招聘管理</span>
+            </template>
+
+            <ElMenuItem index="/admin/add-job">
+              <ElIcon> <Plus /> </ElIcon>
+              <span>添加招聘</span>
+            </ElMenuItem>
+
+            <ElMenuItem index="/admin/edit-job">
+              <ElIcon> <Edit /> </ElIcon>
+              <span>编辑招聘</span>
+            </ElMenuItem>
+          </ElSubMenu>
         </ElMenu>
       </ElAside>
 
@@ -65,7 +82,7 @@
 </template>
 
 <script setup lang="ts">
-import { Memo, Plus, Edit, DataBoard, DocumentCopy } from '@element-plus/icons-vue'
+import { Memo, Plus, Edit, DataBoard, DocumentCopy, OfficeBuilding } from '@element-plus/icons-vue'
 </script>
 
 <style scoped>

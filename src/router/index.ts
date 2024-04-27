@@ -45,6 +45,11 @@ const router = createRouter({
           path: 'exam/:id',
           name: 'exam',
           component: () => import('@/views/ExamView.vue')
+        },
+        {
+          path: 'job',
+          name: 'job_list',
+          component: () => import('@/views/JobListView.vue')
         }
       ]
     },
@@ -77,6 +82,16 @@ const router = createRouter({
           path: 'edit-course',
           name: 'edit_course',
           component: () => import('@/components/admin/course/EditCourse.vue')
+        },
+        {
+          path: 'add-job',
+          name: 'add_job',
+          component: () => import('@/components/admin/job/AddJob.vue')
+        },
+        {
+          path: 'edit-job',
+          name: 'edit_job',
+          component: () => import('@/components/admin/job/EditJob.vue')
         }
       ]
     }

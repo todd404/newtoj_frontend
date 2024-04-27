@@ -12,8 +12,10 @@
       </div>
 
       <div style="align-self: center">
-        <ElButton type="primary" v-if="!isJoinCourse">参与测验</ElButton>
-        <ElButton disabled v-if="isJoinCourse">已参与测验</ElButton>
+        <ElButton type="primary" v-if="!isCourseEnroll" @click="addCourseEnroll()"
+          >参与测验</ElButton
+        >
+        <ElButton disabled v-if="isCourseEnroll">已参与测验</ElButton>
       </div>
     </div>
 
@@ -49,17 +51,17 @@ import vue3videoPlay from 'vue3-video-play'
 import { type Course } from './CourseView.vue'
 import axios from 'axios'
 import type { ResponseResult } from '@/functions/ResponseResult'
-import { showErrorMessge } from '@/functions/utils'
+import { showErrorMessge, showSuccessMessge } from '@/functions/utils'
 
 const courseId = ref('')
 const route = useRoute()
+const isCourseEnroll = ref(true)
 const courseInfo = ref<Course>({
   id: 0,
   userId: '',
   nickname: '',
   title: ''
 })
-const isJoinCourse = ref(false)
 const courseFileList = ref<CourseFile[]>()
 const videoDialogOpen = ref(false)
 const videoSrc = ref('')
@@ -74,6 +76,7 @@ onBeforeMount(() => {
 })
 
 onMounted(() => {
+  getIsCourseEnroll()
   getCourseInfo()
   getFileList()
 })
@@ -95,6 +98,27 @@ const getFileList = async () => {
     showErrorMessge('获取课程文件列表失败')
   } else {
     courseFileList.value = data.data
+  }
+}
+
+const getIsCourseEnroll = async () => {
+  const res = await axios.get(`/api/is-course-enroll`, { params: { courseId: courseId.value } })
+  const data: ResponseResult = res.data
+  if (data.code != 200) {
+    showErrorMessge('获取课程信息失败')
+  } else {
+    isCourseEnroll.value = data.data
+  }
+}
+
+const addCourseEnroll = async () => {
+  const res = await axios.post(`/api/add-course-enroll`, { courseId: courseId.value })
+  const data: ResponseResult = res.data
+  if (data.code != 200) {
+    showErrorMessge('参与课程失败')
+  } else {
+    showSuccessMessge('参与课程成功')
+    getIsCourseEnroll()
   }
 }
 
