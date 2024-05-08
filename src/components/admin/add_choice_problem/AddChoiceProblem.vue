@@ -1,18 +1,22 @@
 <template>
-  <ElCard>
+  <ElCard class="add-choice-problem">
     <ElSpace style="width: 100%; justify-content: center; margin-bottom: 10px">
       <ElText>问题集标题:</ElText>
       <ElInput style="width: 50vw" v-model="problemTitle"></ElInput>
       <ElButton type="primary" @click="onSubmitClick">提交问题</ElButton>
     </ElSpace>
-    <ElSpace style="width: 100%; justify-content: center">
-      <ElText>问题内容：</ElText>
-      <ElInput v-model="addProblemContent" style="width: 50vw"></ElInput>
-      <ElButton type="primary" @click="onAddProblemClick">添加问题</ElButton>
-    </ElSpace>
+
+    <ElAffix :offset="20" :z-index="99999">
+      <ElSpace style="width: 100%; justify-content: center">
+        <ElText>问题内容：</ElText>
+        <ElInput type="textarea" v-model="addProblemContent" style="width: 50vw"></ElInput>
+        <ElButton type="primary" @click="onAddProblemClick">添加问题</ElButton>
+      </ElSpace>
+    </ElAffix>
+
     <ElDivider><ElText style="color: #c73e3a">选中的选项即设置的答案</ElText></ElDivider>
 
-    <ElSpace direction="vertical" style="align-items: start" :size="48">
+    <ElSpace direction="vertical" style="align-items: start; overflow-y: auto" :size="48">
       <template v-for="(problem, index) of problemList" :key="`choice-problem-${index}`">
         <ElSpace direction="vertical" style="align-items: start; padding: 0 20px">
           <div>

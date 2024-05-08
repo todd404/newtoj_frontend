@@ -5,7 +5,7 @@
         <HomeLayoutHeader></HomeLayoutHeader>
       </ElHeader>
 
-      <ElMain>
+      <ElMain style="height: 92vh; overflow-y: auto">
         <RouterView></RouterView>
       </ElMain>
     </ElContainer>

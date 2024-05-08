@@ -1,16 +1,32 @@
 <template>
-  <UComment :config="config" page @submit="submit" @like="like"></UComment>
+  <UComment :config="config" page @submit="submit" @like="like">
+    <template #info="scope">
+      <ElButton size="small" @click="handleWhipserClick(scope)">发私信</ElButton>
+    </template>
+  </UComment>
+  <WhisperDialog
+    v-model="whisperDialogOpen"
+    :otherId="whisperOtherId"
+    :other-nickname="whisperOtherNickName"
+  ></WhisperDialog>
 </template>
 
 <script setup lang="ts">
 import emoji from '@/assets/emoji'
 import { getAllComments, likeComment, submitComment } from '@/functions/CommentFunctions'
+import type { ResponseResult } from '@/functions/ResponseResult'
+import { showErrorMessge } from '@/functions/utils'
 import { useUserInfoStore } from '@/stores/userInfoStore'
+import axios from 'axios'
 import { ElMessage } from 'element-plus'
 import { UComment, type ConfigApi, type SubmitParamApi } from 'undraw-ui'
-import { onMounted, reactive } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
+import WhisperDialog from '../WhisperDialog/WhisperDialog.vue'
 
 const userInfoStore = useUserInfoStore()
+const whisperOtherId = ref('0')
+const whisperOtherNickName = ref('')
+const whisperDialogOpen = ref(false)
 
 const props = defineProps<{
   problemId: string
@@ -18,10 +34,11 @@ const props = defineProps<{
 
 const config = reactive<ConfigApi>({
   user: {
-    id: 1,
-    username: '未登录',
-    avatar:
-      'https://static.juzicon.com/avatars/avatar-200602130320-HMR2.jpeg?x-oss-process=image/resize,w_100',
+    id: userInfoStore.getUserInfo.value?.userId ? userInfoStore.getUserInfo.value.userId : 0,
+    username: userInfoStore.getUserInfo.value?.nickname
+      ? userInfoStore.getUserInfo.value?.nickname
+      : '未登录',
+    avatar: `http://localhost/file/avatar/${userInfoStore.getUserInfo.value?.userId}.png`,
     likeIds: []
   },
   showAddress: false,
@@ -30,6 +47,16 @@ const config = reactive<ConfigApi>({
   comments: []
 })
 
+const getLikeList = async () => {
+  const res = await axios.get(`/api/like-list`, { params: { problemId: props.problemId } })
+  const data: ResponseResult = res.data
+  if (data.code != 200) {
+    showErrorMessge('获取点赞列表失败')
+  } else {
+    config.user.likeIds = data.data
+  }
+}
+
 const refreshComments = async () => {
   let comments = await getAllComments(props.problemId)
   config.comments = comments
@@ -37,6 +64,7 @@ const refreshComments = async () => {
 
 onMounted(() => {
   refreshComments()
+  getLikeList()
 })
 
 // 提交评论事件
@@ -58,6 +86,17 @@ const like = async (id: string, finish: () => void) => {
   if (code == 200) {
     finish()
   }
+}
+
+const handleWhipserClick = (info: any) => {
+  if (info.uid == userInfoStore.getUserInfo.value?.userId) {
+    showErrorMessge('不能给自己发私信')
+    return
+  }
+
+  whisperOtherId.value = info.uid
+  whisperOtherNickName.value = info.user.username
+  whisperDialogOpen.value = true
 }
 </script>
 

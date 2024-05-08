@@ -14,7 +14,9 @@ const cppTypeMap: { [key: string]: string } = {
 
 const javaTypeMap: { [key: string]: string } = {
   int: 'int',
-  'int[]': 'List<int>'
+  'int[]': 'int[]',
+  'int[][]': 'int[][]',
+  string: 'String'
 }
 
 export function getCppCodeTemplate(problemConfig: ProblemConfig) {
@@ -36,4 +38,25 @@ public:
     
     }
 };`
+}
+
+export function getJavaCodeTemplate(problemConfig: ProblemConfig) {
+  const func: string = `${javaTypeMap[problemConfig.returnType]} ${problemConfig.functionName}`
+  let args = ''
+  for (let i = 0; i < problemConfig.argumentTypeList.length; i++) {
+    args =
+      args +
+      javaTypeMap[problemConfig.argumentTypeList[i]] +
+      ' ' +
+      problemConfig.argumentNameList[i] +
+      ', '
+  }
+
+  args = args.slice(0, -2)
+
+  return `class Solution {
+  public ${func}(${args}) {
+    
+  }
+}`
 }

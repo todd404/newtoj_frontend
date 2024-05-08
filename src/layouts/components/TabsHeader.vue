@@ -50,10 +50,16 @@
               <span style="font-size: medium"> 招聘 </span>
             </template>
           </ElTabPane>
+
+          <ElTabPane name="competition" class="my-tab">
+            <template #label>
+              <span style="font-size: medium"> 匹配比赛 </span>
+            </template>
+          </ElTabPane>
         </ElTabs>
       </ElCol>
       <ElCol :span="1">
-        <WhisperBox />
+        <WhisperBox @click="console.log('test')" />
       </ElCol>
       <ElCol :span="1">
         <HeaderAvatar :popover-disabled="!isLogin" @avatar-click="onAvatarClick"></HeaderAvatar>

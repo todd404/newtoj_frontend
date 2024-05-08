@@ -1,6 +1,10 @@
 <template>
   <ElPopover :disabled="popoverDisabled" trigger="hover">
-    <ElLink type="primary" @click.prevent="logout"> 退出 </ElLink>
+    <div style="display: flex; flex-direction: column">
+      <ElButton text @click="$router.push('/profile')">个人中心</ElButton>
+      <ElLink type="primary" @click.prevent="logout"> 退出 </ElLink>
+    </div>
+
     <template #reference>
       <ElAvatar
         @click.prevent="$emit('avatarClick')"
@@ -34,6 +38,7 @@ const logout = async () => {
 
     userInfoStore.deleteToken()
     userInfoStore.deleteUserInfo()
+    location.reload()
   } else {
     ElMessage({
       message: '退出失败',

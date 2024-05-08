@@ -10,7 +10,8 @@
         ref="upload"
         action="/api/upload"
         :limit="1"
-        accept=".jpg, .jpeg, .png"
+        accept=".jpg, .jpeg, .png, .webp, .avif"
+        :before-upload="handleBeforeCoverUpload"
         :headers="{ Authorization: `Bearer ${userInfoStore.getToken.value}` }"
         drag
         list-type="picture"
@@ -47,6 +48,18 @@ const addCourseRequest = reactive<AddCourseRequest>({
   title: '',
   coverFile: ''
 })
+
+const handleBeforeCoverUpload: UploadProps['beforeUpload'] = (rawFile) => {
+  const acceptType = ['image/avif', 'image/png', 'image/webp', 'image/jpeg']
+  if (!acceptType.includes(rawFile.type)) {
+    showErrorMessge('只能上传图片类型')
+    return false
+  } else if (rawFile.size / 1024 / 1024 > 5) {
+    showErrorMessge('封面大小不能超过5MB!')
+    return false
+  }
+  return true
+}
 
 const handleExceed: UploadProps['onExceed'] = (files) => {
   upload.value!.clearFiles()

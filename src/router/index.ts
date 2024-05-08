@@ -50,6 +50,21 @@ const router = createRouter({
           path: 'job',
           name: 'job_list',
           component: () => import('@/views/JobListView.vue')
+        },
+        {
+          path: 'profile',
+          name: 'profile',
+          component: () => import('@/views/ProfileView.vue')
+        },
+        {
+          path: 'whisper',
+          name: 'whisper',
+          component: () => import('@/views/WhisperView.vue')
+        },
+        {
+          path: 'competition',
+          name: 'competition',
+          component: () => import('@/views/CopetitionView.vue')
         }
       ]
     },
@@ -58,6 +73,11 @@ const router = createRouter({
       name: 'admin',
       component: () => import('@/layouts/AdminLayout.vue'),
       children: [
+        {
+          path: 'edit-user',
+          name: 'edit_user',
+          component: () => import('@/components/admin/user/UserEdit.vue')
+        },
         {
           path: 'add-problem',
           name: 'add_problem',

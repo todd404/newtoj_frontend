@@ -10,13 +10,14 @@
       </ElFormItem>
 
       <ElFormItem>
-        <ElLink> 立即注册 </ElLink>
+        <ElLink @click="registerDialogOpen = true"> 立即注册 </ElLink>
         <ElButton type="primary" class="submit-button" @click.prevent="submitLoginForm">
           登录
         </ElButton>
       </ElFormItem>
     </ElForm>
   </ElDialog>
+  <RegisterDialog v-model="registerDialogOpen"></RegisterDialog>
 </template>
 
 <script setup lang="ts">
@@ -33,8 +34,11 @@ import {
   type FormRules
 } from 'element-plus'
 import { reactive, ref } from 'vue'
+import RegisterDialog from './RegisterDialog.vue'
+import { showErrorMessge, showSuccessMessge } from '@/functions/utils'
 
 const dialogOpen = defineModel({ type: Boolean })
+const registerDialogOpen = ref<boolean>(false)
 
 const loginFormRef = ref<FormInstance>()
 
@@ -57,12 +61,10 @@ const submitLoginForm = async () => {
   let res = await axios.post('/api/login', loginForm)
   let body = res.data
 
-  if (body.code == 200) {
-    ElMessage({
-      message: '登录成功',
-      type: 'success'
-    })
-
+  if (body.code != 200) {
+    showErrorMessge('登陆失败')
+  } else {
+    showSuccessMessge('登录成功')
     let token = body.data.token
     const userinfoStore = useUserInfoStore()
     userinfoStore.setToken(token)
@@ -70,11 +72,7 @@ const submitLoginForm = async () => {
     refreshAxiosToken()
 
     dialogOpen.value = false
-  } else {
-    ElMessage({
-      message: '登录失败',
-      type: 'error'
-    })
+    location.reload()
   }
 }
 </script>

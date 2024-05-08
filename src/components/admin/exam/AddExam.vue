@@ -101,7 +101,7 @@
 
 <script setup lang="ts">
 import type { ResponseResult } from '@/functions/ResponseResult'
-import { showErrorMessge } from '@/functions/utils'
+import { showErrorMessge, showSuccessMessge } from '@/functions/utils'
 import { Search, Plus, Delete } from '@element-plus/icons-vue'
 import axios from 'axios'
 import { computed, onMounted, reactive, ref } from 'vue'
@@ -315,7 +315,13 @@ const handleSubmitClick = async () => {
     startTime: examConfig.dateRange[0],
     endTime: examConfig.dateRange[1]
   }
-  await axios.post(`/api/add-exam`, addExamRequest)
+  const res = await axios.post(`/api/add-exam`, addExamRequest)
+  const data: ResponseResult = res.data
+  if (data.code != 200) {
+    showErrorMessge('添加测验失败')
+  } else {
+    showSuccessMessge('添加测验成功')
+  }
 }
 
 onMounted(() => {

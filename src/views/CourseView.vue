@@ -1,7 +1,20 @@
 <template>
+  <ElSpace
+    style="
+      padding: 0 10vw;
+      padding-bottom: 10px;
+      position: sticky;
+      width: 100%;
+      justify-content: center;
+    "
+  >
+    <ElIcon style="font-size: 20px"> <Search /> </ElIcon>
+    <ElInput v-model="searchContent" style="width: 24rem"></ElInput>
+  </ElSpace>
+
   <div class="course-view">
     <ElSkeleton :loading="listLoading" animated :rows="8"></ElSkeleton>
-    <tamplate v-for="(c, index) of courseList" :key="`course-${index}`">
+    <tamplate v-for="(c, index) of showCourseList" :key="`course-${index}`">
       <ElCard class="course-card" @click="$router.push(`/learn/${c.id}`)">
         <div style="display: flex; flex-direction: column; justify-items: center">
           <img height="152px" :src="`http://localhost/file/cover/course/${c.id}.jpg`" />
@@ -16,7 +29,8 @@
 import type { ResponseResult } from '@/functions/ResponseResult'
 import { showErrorMessge } from '@/functions/utils'
 import axios from 'axios'
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
+import { Search } from '@element-plus/icons-vue'
 
 export interface Course {
   id: number
@@ -26,6 +40,14 @@ export interface Course {
 }
 
 const courseList = ref<Course[]>([])
+const searchContent = ref('')
+const showCourseList = computed<Course[]>(() => {
+  if (searchContent.value == '') {
+    return courseList.value
+  }
+
+  return courseList.value.filter((v) => v.title.includes(searchContent.value))
+})
 const listLoading = ref(true)
 
 const getCourseList = async () => {

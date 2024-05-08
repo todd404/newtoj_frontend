@@ -22,18 +22,18 @@
         v-for="(exam, index) of att.attendExamItemList"
         :key="`exam-item-${index}`"
       >
-        <div style="display: flex; align-items: center; gap: 10px">
+        <div style="display: flex; align-items: center; gap: 10px; width: 300px">
           <ElIcon><EditPen /></ElIcon>
-          <ElText>{{ `测验: ${exam.title}` }}</ElText>
+          <ElText truncated>{{ `测验: ${exam.title}` }}</ElText>
         </div>
         <ElText type="warning">
           {{ `结束时间: ${new Date(exam.endTime).toLocaleString()}` }}</ElText
         >
-        <div style="align-self: flex-end">
+        <div style="align-self: flex-end; width: 100px; display: flex; justify-content: center">
           <ElText v-if="exam.score != null">{{ `成绩：${exam.score}` }}</ElText>
-          <ElButton v-if="exam.score == null" @click="handleStartExamClick(exam.id)"
-            >开始测验</ElButton
-          >
+          <ElButton v-if="exam.score == null" @click="handleStartExamClick(exam.id)">
+            开始测验
+          </ElButton>
         </div>
       </div>
     </ElCollapseItem>

@@ -2,7 +2,7 @@
   <ElButton type="danger" plain style="margin: 20px 50px" @click="handleSubmitClick()"
     >提交本页选择题(可多次提交)</ElButton
   >
-  <ElCard style="margin: 20px 50px">
+  <ElCard style="margin: 20px 50px; overflow-y: auto">
     <ElSpace direction="vertical" style="align-items: start" :size="32">
       <template v-for="(problem, index) of choiceProblemList" :key="`choice-problem-${index}`">
         <ElSpace direction="vertical" style="align-items: start; padding: 0 20px">

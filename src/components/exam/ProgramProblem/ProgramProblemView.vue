@@ -31,7 +31,7 @@ import ProblemCodeEditor from '@/components/problem/ProblemCodeEditor.vue'
 import { runForResult, submitJudge } from '@/functions/JudgeFuntions'
 import { Splitpanes, Pane } from 'splitpanes'
 import 'splitpanes/dist/splitpanes.css'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { getCodeTamplate, getProblem, type Problem } from '@/functions/ProblemFunctions'
 import ProblemRun, { type RunCase } from '@/components/problem/ProblemRun.vue'
 import ProgramProblemArea from './ProgramProblemArea.vue'
@@ -76,6 +76,11 @@ const getPRB = async () => {
   code.value = getCodeTamplate[language.value](problem.value)
   loading.value = false
 }
+
+watch(language, (newLanguage) => {
+  if (problem.value == undefined) return
+  code.value = getCodeTamplate[newLanguage](problem.value)
+})
 
 onMounted(() => {
   getPRB()

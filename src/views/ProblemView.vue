@@ -114,8 +114,9 @@ const refreshSavedCode = () => {
 
 const getPRB = async () => {
   problem.value = await getProblem(problemId.value)
-  refreshSavedCode()
   loading.value = false
+
+  refreshSavedCode()
 }
 
 onMounted(() => {

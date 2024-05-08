@@ -39,14 +39,17 @@
       <ElTabPane name="result" label="测试结果">
         <ElSkeleton :rows="3" animated :loading="resultLoading" />
         <tamplate v-if="resultList.length > 0">
-          <ElTag
-            style="cursor: pointer"
-            v-for="(r, index) of resultList"
-            :key="`result-tag-${index}`"
-            @click="currentResultIndex = index"
-          >
-            {{ `结果${index + 1}` }}
-          </ElTag>
+          <div style="display: flex; gap: 2px">
+            <ElTag
+              style="cursor: pointer"
+              v-for="(r, index) of resultList"
+              :key="`result-tag-${index}`"
+              @click="currentResultIndex = index"
+            >
+              {{ `结果${index + 1}` }}
+            </ElTag>
+          </div>
+
           <ElText>
             {{ resultList[currentResultIndex] }}
           </ElText>

@@ -2,7 +2,7 @@
   <ElBadge :value="totalUnreadWhisper" :offset="[0, -1]">
     <ElPopover :visible="totalUnreadWhisper == 0 ? false : undefined">
       <template #reference>
-        <ElButton text circle>
+        <ElButton text circle @click="$router.push('/whisper')">
           <ElIcon style="font-size: 20px">
             <Message />
           </ElIcon>

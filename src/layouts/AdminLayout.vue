@@ -4,6 +4,17 @@
       <ElAside>
         <h5 class="admin-menu-title">Toj Admin</h5>
         <ElMenu router :default-active="$route.path" style="height: 100vh">
+          <ElSubMenu index="user">
+            <template #title>
+              <ElIcon><User /></ElIcon>
+              <span>用户管理</span>
+            </template>
+
+            <ElMenuItem index="/admin/edit-user">
+              <ElIcon><Edit /></ElIcon>
+              <span>编辑用户</span>
+            </ElMenuItem>
+          </ElSubMenu>
           <ElSubMenu index="problem">
             <template #title>
               <ElIcon> <Memo /> </ElIcon>
@@ -82,7 +93,15 @@
 </template>
 
 <script setup lang="ts">
-import { Memo, Plus, Edit, DataBoard, DocumentCopy, OfficeBuilding } from '@element-plus/icons-vue'
+import {
+  Memo,
+  Plus,
+  Edit,
+  DataBoard,
+  DocumentCopy,
+  OfficeBuilding,
+  User
+} from '@element-plus/icons-vue'
 </script>
 
 <style scoped>

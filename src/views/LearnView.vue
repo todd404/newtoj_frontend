@@ -2,13 +2,14 @@
   <div style="padding: 0 10vw; width: 100%">
     <div style="display: flex; width: 100%; justify-content: space-between">
       <img height="152px" :src="`http://localhost/file/cover/course/${courseId}.jpg`" />
-      <div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center">
+      <div style="display: flex; flex-direction: column; justify-content: center">
         <ElText style="font-size: 32px">
           {{ courseInfo.title }}
         </ElText>
         <ElText>
           {{ `讲师：${courseInfo.nickname}` }}
         </ElText>
+        <ElButton type="primary" @click="handleWhipserTeacherClick">私信导师</ElButton>
       </div>
 
       <div style="align-self: center">
@@ -41,6 +42,11 @@
   <ElDialog width="1360" v-model="videoDialogOpen">
     <vue3videoPlay width="1280" height="720" :src="videoSrc"></vue3videoPlay>
   </ElDialog>
+  <WhisperDialog
+    v-model="whisperDialogOpen"
+    :other-id="courseInfo.userId"
+    :other-nickname="courseInfo.nickname"
+  ></WhisperDialog>
 </template>
 
 <script setup lang="ts">
@@ -52,6 +58,8 @@ import { type Course } from './CourseView.vue'
 import axios from 'axios'
 import type { ResponseResult } from '@/functions/ResponseResult'
 import { showErrorMessge, showSuccessMessge } from '@/functions/utils'
+import WhisperDialog from '@/components/WhisperDialog/WhisperDialog.vue'
+import { useUserInfoStore } from '@/stores/userInfoStore'
 
 const courseId = ref('')
 const route = useRoute()
@@ -65,6 +73,7 @@ const courseInfo = ref<Course>({
 const courseFileList = ref<CourseFile[]>()
 const videoDialogOpen = ref(false)
 const videoSrc = ref('')
+const whisperDialogOpen = ref(false)
 
 interface CourseFile {
   file: string
@@ -132,6 +141,15 @@ const onListItemClick = (file: CourseFile) => {
     link.download = file.file
     link.click()
   }
+}
+
+const handleWhipserTeacherClick = () => {
+  const userInfoStore = useUserInfoStore()
+  if (userInfoStore.getUserInfo.value?.userId.toString() == courseInfo.value.userId) {
+    showErrorMessge('不能私信自己')
+    return
+  }
+  whisperDialogOpen.value = true
 }
 </script>
 

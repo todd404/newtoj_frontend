@@ -1,7 +1,7 @@
 import axios from 'axios'
 import type { ProblemConfig } from './AddProblemFunctions'
 import type { ResponseResult } from './ResponseResult'
-import { getCppCodeTemplate } from './CodeTemplate'
+import { getCppCodeTemplate, getJavaCodeTemplate } from './CodeTemplate'
 
 export interface Problem {
   id: string
@@ -21,9 +21,14 @@ export async function getProblem(problemId: string): Promise<Problem> {
 }
 
 export const getCodeTamplate: { [key: string]: tamplateFuntion } = {
-  cpp
+  cpp,
+  java
 }
 
 function cpp(problem: Problem): string {
   return getCppCodeTemplate(problem.problemConfig)
+}
+
+function java(problem: Problem): string {
+  return getJavaCodeTemplate(problem.problemConfig)
 }

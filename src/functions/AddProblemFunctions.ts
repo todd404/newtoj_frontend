@@ -6,7 +6,16 @@ export const typeReg: { [key: string]: RegExp } = {
   'int[]': /^\[(-?\d)+(?:,\s*-?\d+)*\]$|\[\]/
 }
 
-export const supportType: string[] = ['int', 'int[]', 'int[][]', 'string', 'string[]']
+export const supportType: string[] = [
+  'int',
+  'int[]',
+  'int[][]',
+  'double',
+  'double[]',
+  'double[][]',
+  'string',
+  'string[]'
+]
 
 export interface AddProblemConfig {
   title: string
