@@ -91,7 +91,7 @@ import { sendWhisper, type Whisper } from '@/functions/WhisperFuntions'
 import axios from 'axios'
 import type { ResponseResult } from '@/functions/ResponseResult'
 import { showErrorMessge } from '@/functions/utils'
-import ChatVieForWhisperView from '@/components/whisper/ChatVieForWhisperView.vue'
+import ChatVieForWhisperView from '@/components/whisper/ChatViewForWhisperView.vue'
 import dayjs from 'dayjs'
 
 interface WhisperHistory {
@@ -134,9 +134,36 @@ const getWhisperHistoryList = async () => {
   }
 }
 
+const setRead = async (otherId: string) => {
+  const whisper: Whisper = {
+    id: 0,
+    sendUserId: otherId,
+    content: '',
+    createAt: '',
+    receiveUserId: ''
+  }
+
+  const res = await axios.post(`/api/read-all-whisper`, whisper)
+  const data: ResponseResult = res.data
+  if (data.code != 200) {
+    showErrorMessge('设置已读失败')
+  }
+}
+
 const onWhisperSelectItemClick = (id: number) => {
   otherId.value = id.toString()
   activeId.value = id
+
+  let unreadCount: number = 0
+  for (var wh of whisperHistoryList.value) {
+    if (wh.userId == id) {
+      unreadCount = wh.unreadCount
+    }
+  }
+
+  if (unreadCount > 0) {
+    setRead(id.toString())
+  }
 }
 
 const onSendButtonClick = async () => {
@@ -181,6 +208,9 @@ const getShowDateTimeString = (date: string): string => {
 
 onMounted(() => {
   getWhisperHistoryList()
+  setInterval(() => {
+    getWhisperHistoryList()
+  }, 1000)
 })
 </script>
 

@@ -25,6 +25,7 @@ import { onMounted, ref, watch } from 'vue'
 import { Codemirror } from 'vue-codemirror'
 import { oneDark } from '@codemirror/theme-one-dark'
 import { LanguageExtensions } from '@/functions/LanguageExtensions'
+import { ayuLight } from 'thememirror'
 
 const code = defineModel<string, string>('code')
 const language = defineModel<string, string>('langauge', { required: true })
@@ -34,11 +35,11 @@ const emit = defineEmits<{
 }>()
 
 watch(language, (newLanguage) => {
-  extensions.value = [LanguageExtensions[newLanguage](), oneDark]
+  extensions.value = [LanguageExtensions[newLanguage](), ayuLight]
 })
 
 onMounted(() => {
-  extensions.value = [LanguageExtensions[language.value](), oneDark]
+  extensions.value = [LanguageExtensions[language.value](), ayuLight]
 })
 const extensions = ref()
 </script>

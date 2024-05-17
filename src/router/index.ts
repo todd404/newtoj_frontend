@@ -75,43 +75,75 @@ const router = createRouter({
       children: [
         {
           path: 'edit-user',
-          name: 'edit_user',
+          name: 'admin_edit_user',
           component: () => import('@/components/admin/user/UserEdit.vue')
         },
         {
           path: 'add-problem',
-          name: 'add_problem',
+          name: 'admin_add_problem',
           component: () => import('@/components/admin/add_problem/AddProblem.vue')
         },
         {
           path: 'add-choice-problem',
-          name: 'add_choice_problem',
+          name: 'admin_add_choice_problem',
           component: () => import('@/components/admin/add_choice_problem/AddChoiceProblem.vue')
         },
         {
           path: 'add-exam',
-          name: 'add_exam',
+          name: 'admin_add_exam',
           component: () => import('@/components/admin/exam/AddExam.vue')
         },
         {
           path: 'add-course',
-          name: 'add_course',
+          name: 'admin_add_course',
           component: () => import('@/components/admin/course/AddCourse.vue')
         },
         {
           path: 'edit-course',
-          name: 'edit_course',
+          name: 'admin_edit_course',
           component: () => import('@/components/admin/course/EditCourse.vue')
         },
         {
           path: 'add-job',
-          name: 'add_job',
+          name: 'admin_add_job',
           component: () => import('@/components/admin/job/AddJob.vue')
         },
         {
           path: 'edit-job',
-          name: 'edit_job',
+          name: 'admin_edit_job',
           component: () => import('@/components/admin/job/EditJob.vue')
+        }
+      ]
+    },
+    {
+      path: '/teacher',
+      name: 'teacher',
+      component: () => import('@/layouts/TeacherLayout.vue'),
+      children: [
+        {
+          path: 'add-choice-problem',
+          name: 'teacher_add_choice_problem',
+          component: () => import('@/components/admin/add_choice_problem/AddChoiceProblem.vue')
+        },
+        {
+          path: 'add-exam',
+          name: 'teacher_add_exam',
+          component: () => import('@/components/admin/exam/AddExam.vue')
+        },
+        {
+          path: 'edit-exam',
+          name: 'teacher_edit_exam',
+          component: () => import('@/components/admin/exam/EditExam.vue')
+        },
+        {
+          path: 'add-course',
+          name: 'teacher_add_course',
+          component: () => import('@/components/admin/course/AddCourse.vue')
+        },
+        {
+          path: 'edit-course',
+          name: 'teacher_edit_course',
+          component: () => import('@/components/admin/course/EditCourse.vue')
         }
       ]
     }

@@ -1,9 +1,25 @@
 import axios from 'axios'
 import type { ResponseResult } from './ResponseResult'
+import { type validateFunction } from '@/components/ValidateInput.vue'
+import {
+  validateBool,
+  validateDoubleArray,
+  validateString,
+  validateStringArray,
+  validateTwoDimDoubleArray,
+  validateTwoDimIntArray
+} from './TypeValidateFunctions'
 
-export const typeReg: { [key: string]: RegExp } = {
+export const typeReg: { [key: string]: RegExp | validateFunction } = {
   int: /^-?\d+$/,
-  'int[]': /^\[(-?\d)+(?:,\s*-?\d+)*\]$|\[\]/
+  'int[]': /^\[(-?\d)+(?:,\s*-?\d+)*\]$|\[\]/,
+  'int[][]': validateTwoDimIntArray,
+  double: /^[+-]?\d+\.?\d*$/,
+  'double[]': validateDoubleArray,
+  'double[][]': validateTwoDimDoubleArray,
+  string: validateString,
+  'string[]': validateStringArray,
+  bool: validateBool
 }
 
 export const supportType: string[] = [
@@ -14,7 +30,8 @@ export const supportType: string[] = [
   'double[]',
   'double[][]',
   'string',
-  'string[]'
+  'string[]',
+  'bool'
 ]
 
 export interface AddProblemConfig {

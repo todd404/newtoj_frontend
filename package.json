@@ -13,11 +13,13 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@ant-design/icons-vue": "^7.0.1",
     "@codemirror/lang-cpp": "^6.0.2",
     "@codemirror/lang-java": "^6.0.1",
     "@codemirror/lang-javascript": "^6.2.2",
     "@codemirror/theme-one-dark": "^6.1.2",
     "@element-plus/icons-vue": "^2.3.1",
+    "ant-design-vue": "^4.2.1",
     "axios": "^1.6.8",
     "codemirror": "^6.0.1",
     "dayjs": "^1.11.11",
@@ -31,6 +33,7 @@
     "pinia-plugin-persistedstate": "^3.2.1",
     "prismjs": "^1.29.0",
     "splitpanes": "^3.1.5",
+    "thememirror": "^2.0.1",
     "undraw-ui": "^1.0.7",
     "vditor": "^3.10.3",
     "video.js": "^8.10.0",

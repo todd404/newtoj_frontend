@@ -9,14 +9,24 @@ const cppTypeMap: { [key: string]: string } = {
   int: 'int',
   'int[]': 'vector<int>',
   'int[][]': 'vector<vector<int>>',
-  string: 'string'
+  double: 'double',
+  'double[]': 'vector<double>',
+  'double[][]': 'vector<vector<double>>',
+  string: 'string',
+  'string[]': 'vector<string>',
+  bool: 'bool'
 }
 
 const javaTypeMap: { [key: string]: string } = {
   int: 'int',
   'int[]': 'int[]',
   'int[][]': 'int[][]',
-  string: 'String'
+  double: 'double',
+  'double[]': 'double[]',
+  'double[][]': 'double[][]',
+  string: 'string',
+  'string[]': 'string[]',
+  bool: 'boolean'
 }
 
 export function getCppCodeTemplate(problemConfig: ProblemConfig) {

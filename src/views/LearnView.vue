@@ -39,7 +39,7 @@
       </li>
     </ul>
   </div>
-  <ElDialog width="1360" v-model="videoDialogOpen">
+  <ElDialog width="1360" v-model="videoDialogOpen" destroy-on-close>
     <vue3videoPlay width="1280" height="720" :src="videoSrc"></vue3videoPlay>
   </ElDialog>
   <WhisperDialog

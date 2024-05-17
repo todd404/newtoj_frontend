@@ -7,6 +7,7 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    AButton: typeof import('ant-design-vue/es')['Button']
     AddChoiceProbem: typeof import('./src/components/admin/add_choice_problem/AddChoiceProbem.vue')['default']
     AddChoiceProblem: typeof import('./src/components/admin/add_choice_problem/AddChoiceProblem.vue')['default']
     AddCourse: typeof import('./src/components/admin/course/AddCourse.vue')['default']
@@ -20,13 +21,16 @@ declare module 'vue' {
     AddProblemContent: typeof import('./src/components/admin/add_problem/AddProblemContent.vue')['default']
     AddProblemStatusDrawer: typeof import('./src/components/admin/add_problem/AddProblemStatusDrawer.vue')['default']
     AddProblemTags: typeof import('./src/components/admin/add_problem/AddProblemTags.vue')['default']
+    ATable: typeof import('ant-design-vue/es')['Table']
     ChatMessage: typeof import('./src/components/WhisperDialog/ChatMessage.vue')['default']
     ChatVieForWhisperView: typeof import('./src/components/whisper/ChatVieForWhisperView.vue')['default']
     ChatView: typeof import('./src/components/WhisperDialog/ChatView.vue')['default']
+    ChatViewForWhisperView: typeof import('./src/components/whisper/ChatViewForWhisperView.vue')['default']
     ChoiceProblem: typeof import('./src/components/exam/ChoiceProblem/ChoiceProblem.vue')['default']
     EditCourse: typeof import('./src/components/admin/course/EditCourse.vue')['default']
     EditCourseExamDialog: typeof import('./src/components/admin/course/EditCourseExamDialog.vue')['default']
     EditCourseFileDialog: typeof import('./src/components/admin/course/EditCourseFileDialog.vue')['default']
+    EditExam: typeof import('./src/components/admin/exam/EditExam.vue')['default']
     EditExamDialog: typeof import('./src/components/admin/course/EditExamDialog.vue')['default']
     EditFileDialog: typeof import('./src/components/admin/course/EditFileDialog.vue')['default']
     EditJob: typeof import('./src/components/admin/job/EditJob.vue')['default']
@@ -106,6 +110,8 @@ declare module 'vue' {
     ProgramProblemView: typeof import('./src/components/exam/ProgramProblem/ProgramProblemView.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    TeacherExamEdit: typeof import('./src/components/teacher/TeacherExamEdit.vue')['default']
+    TeacherScoreManageDialog: typeof import('./src/components/teacher/TeacherScoreManageDialog.vue')['default']
     TheWelcome: typeof import('./src/components/TheWelcome.vue')['default']
     UnreadWhisperList: typeof import('./src/components/WhisperDialog/UnreadWhisperList.vue')['default']
     UserEdit: typeof import('./src/components/admin/user/UserEdit.vue')['default']

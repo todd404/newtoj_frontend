@@ -101,7 +101,6 @@ const statusDrawerOpen = ref(false)
 watch(
   [problemConfig, problemArgs],
   ([newProblemConfig, newProblemArgs]) => {
-    console.log(newProblemConfig, newProblemArgs)
     code.value = getCppCodeTemplate({
       functionName: newProblemConfig.functionName,
       returnType: newProblemConfig.returnType,
