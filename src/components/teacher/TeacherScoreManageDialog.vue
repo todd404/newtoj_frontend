@@ -51,7 +51,7 @@ const getExamScoreList = async () => {
 const handleDownloadDetailClick = (record: Record<string, any>) => {
   const a = document.createElement('a')
   a.style.display = 'none'
-  a.download = `${record.username}_测验_${props.examTile}_成绩`
+  a.download = `${record.username}_测验_${props.examTile}_成绩.xlsm`
   a.href = `http://localhost/file/exam_result/exam_${props.examId}_user_${record.userId}.xlsm`
   document.body.appendChild(a)
   a.click()
