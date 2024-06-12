@@ -60,7 +60,7 @@
 <script setup lang="ts">
 import axios from 'axios'
 import { computed, onMounted, ref, watch } from 'vue'
-import { Search } from '@element-plus/icons-vue'
+import { Search, Check } from '@element-plus/icons-vue'
 
 interface tableItem {
   id: number
@@ -121,6 +121,13 @@ const getTagColor = (input: string): string => {
   const color = (hash & 0x00ffffff).toString(16).toUpperCase() // 使用与操作确保结果是 24 位的无符号整数，并转换为十六进制字符串
   let hexColor = '#' + '00000'.substring(0, 6 - color.length) + color // 补全为六位十六进制颜色代码
 
+  if (input == '简单问题') {
+    hexColor = '#86C166'
+  } else if (input == '中等问题') {
+    hexColor = '#FFB11B'
+  } else if (input == '困难问题') {
+    hexColor == '#CB4042'
+  }
   // 如果 input 等于 lastSearchTag.value，返回反色
   if (input === lastSearchTag.value) {
     // 计算加深的颜色

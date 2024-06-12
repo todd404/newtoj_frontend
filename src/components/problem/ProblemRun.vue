@@ -1,6 +1,6 @@
 <template>
   <div style="width: 100; height: 100%; display: flex">
-    <ElTabs type="border-card" style="width: 100%" v-model="tabName">
+    <ElTabs type="border-card" style="width: 100%; overflow-y: auto" v-model="tabName">
       <ElTabPane name="case" label="测试用例">
         <div style="gap: 2px; display: flex; width: 100%">
           <ElTag
@@ -64,9 +64,9 @@
               height: 100%;
             "
           >
-            <ElText :type="resultMsg == '请先执行代码' ? 'info' : 'danger'">
-              {{ resultMsg }}
-            </ElText>
+            <TypographyParagraph :type="resultMsg == '请先执行代码' ? 'secondary' : 'danger'">
+              <pre>{{ resultMsg }}</pre>
+            </TypographyParagraph>
           </div>
         </tamplate>
       </ElTabPane>
@@ -81,6 +81,7 @@ import { onMounted, ref, watch } from 'vue'
 import ValidateInput from '../ValidateInput.vue'
 import { typeReg } from '@/functions/AddProblemFunctions'
 import { getRunStatus } from '@/functions/JudgeFuntions'
+import { TypographyParagraph } from 'ant-design-vue'
 
 const runCaseListModel = defineModel<RunCase[]>({ required: true })
 const props = defineProps<{

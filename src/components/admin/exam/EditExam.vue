@@ -14,10 +14,16 @@
     </Table>
   </div>
   <TeacherScoreManageDialog
+    v-if="userInfoStore.getUserInfo.value?.role == 'teacher'"
     v-model="scoreDialogOpen"
     :examId="scoreDialogExam.id"
     :examTile="scoreDialogExam.title"
-  ></TeacherScoreManageDialog>
+  />
+  <CompanyScoreManageDialog
+    v-model="scoreDialogOpen"
+    :examId="scoreDialogExam.id"
+    :examTile="scoreDialogExam.title"
+  />
 </template>
 
 <script setup lang="ts">
@@ -28,6 +34,10 @@ import axios from 'axios'
 import type { ResponseResult } from '@/functions/ResponseResult'
 import { showErrorMessge } from '@/functions/utils'
 import TeacherScoreManageDialog from '@/components/teacher/TeacherScoreManageDialog.vue'
+import CompanyScoreManageDialog from '@/components/company/CompanyScoreManageDialog.vue'
+import { useUserInfoStore } from '@/stores/userInfoStore'
+
+const userInfoStore = useUserInfoStore()
 
 const cols: TableColumnsType = [
   { title: '测验名', key: 'name', dataIndex: 'title' },

@@ -6,10 +6,17 @@
       <ElTableColumn label="用户昵称" prop="nickname"></ElTableColumn>
       <ElTableColumn label="用户角色">
         <template #default="scope">
-          <ElSelect v-model="userList[scope.$index].role">
+          <ElSelect
+            v-model="userList[scope.$index].role"
+            @change="
+              () => {
+                changeUserRole(scope.$index)
+              }
+            "
+          >
             <ElOption :value="0" label="普通用户"></ElOption>
-            <ElOption :value="1" label="导师用户"></ElOption>
-            <ElOption :value="2" label="企业用户"></ElOption>
+            <ElOption :value="1" label="企业用户"></ElOption>
+            <ElOption :value="2" label="导师用户"></ElOption>
             <ElOption :value="3" label="管理员"></ElOption>
           </ElSelect>
         </template>
@@ -30,11 +37,9 @@
 
 <script setup lang="ts">
 import type { ResponseResult } from '@/functions/ResponseResult'
-import { showErrorMessge } from '@/functions/utils'
+import { showErrorMessge, showSuccessMessge } from '@/functions/utils'
 import axios from 'axios'
-import { ElSelect } from 'element-plus'
 import { onMounted, ref } from 'vue'
-import { Delete } from '@element-plus/icons-vue'
 
 interface User {
   userId: number
@@ -60,6 +65,17 @@ const getAllUserList = async () => {
     showErrorMessge('获取用户列表失败')
   } else {
     userList.value = data.data
+  }
+}
+
+const changeUserRole = async (index: number) => {
+  const user: User = userList.value[index]
+  const res = await axios.post(`/api/change-user-role`, user)
+  const data: ResponseResult = res.data
+  if (data.code != 200) {
+    showErrorMessge('改变用户角色失败')
+  } else {
+    showSuccessMessge('改变用户角色成功')
   }
 }
 

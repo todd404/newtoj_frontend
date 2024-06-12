@@ -17,7 +17,7 @@
     <tamplate v-for="(c, index) of showCourseList" :key="`course-${index}`">
       <ElCard class="course-card" @click="$router.push(`/learn/${c.id}`)">
         <div style="display: flex; flex-direction: column; justify-items: center">
-          <img height="152px" :src="`http://localhost/file/cover/course/${c.id}.jpg`" />
+          <img height="152px" :src="`/file/cover/course/${c.id}.jpg`" />
           <ElText>{{ c.title }}</ElText>
         </div>
       </ElCard>

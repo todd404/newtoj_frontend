@@ -20,9 +20,9 @@
           <ElText type="success"> 判题成功 </ElText>
         </template>
         <template v-if="statusData.data.code > 200">
-          <ElText type="danger">
-            {{ statusData.data.msg }}
-          </ElText>
+          <TypographyParagraph type="danger">
+            <pre>{{ statusData.data.msg }}</pre>
+          </TypographyParagraph>
         </template>
       </ElCard>
     </ElSpace>
@@ -32,7 +32,8 @@
 <script setup lang="ts">
 import { getStatus, type JudgeStatus } from '@/functions/JudgeFuntions'
 import { Check, CircleClose, Loading } from '@element-plus/icons-vue'
-import { ElMessage } from 'element-plus'
+import { message } from 'ant-design-vue'
+import { TypographyParagraph } from 'ant-design-vue'
 import { reactive, watch } from 'vue'
 
 const open = defineModel<boolean>()
@@ -53,15 +54,9 @@ const refreshStatusProcess = async (uuid: string) => {
   const body: JudgeStatus = await getStatus(uuid)
   if (body.code != 200) {
     if (body.msg != null) {
-      ElMessage({
-        type: 'error',
-        message: body.msg
-      })
+      message.error(body.msg)
     } else {
-      ElMessage({
-        type: 'error',
-        message: '查询状态失败: 未知错误'
-      })
+      message.error('查询状态失败: 未知错误')
     }
 
     return

@@ -21,7 +21,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import ChatView from './ChatView.vue'
-import { ElMessage } from 'element-plus'
+import { message } from 'ant-design-vue'
 import { sendWhisper, type Whisper } from '@/functions/WhisperFuntions'
 const open = defineModel<boolean>({ required: true })
 const whisperContent = ref('')
@@ -35,10 +35,7 @@ const props = defineProps<{
 
 const onSendButtonClick = async () => {
   if (whisperContent.value == '') {
-    ElMessage({
-      type: 'error',
-      message: '不能发送空白内容'
-    })
+    message.error('不能发送空白内容')
 
     return
   }

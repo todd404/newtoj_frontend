@@ -63,7 +63,7 @@ import type { ResponseResult } from '@/functions/ResponseResult'
 import { showErrorMessge, showSuccessMessge } from '@/functions/utils'
 import { ArrowLeft, ArrowRight } from '@element-plus/icons-vue'
 import axios from 'axios'
-import { ElMessage, ElText } from 'element-plus'
+import { message } from 'ant-design-vue'
 import { onBeforeMount, onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 
@@ -103,21 +103,11 @@ const examInit = async () => {
   } else {
     examUUID.value = data.data.uuid
     timeLimit.value = data.data.timeLimit
-    ElMessage({
-      type: 'info',
-      duration: 0,
-      dangerouslyUseHTMLString: true,
-      message: `<div id="count-down"><span id="count-down-span">剩余 ${timeLimit.value} 分钟</span></div>`
-    })
+    message.info({ content: `剩余 ${timeLimit.value} 分钟`, key: 'count_down_info', duration: 0 })
 
     setInterval(() => {
       timeLimit.value--
-      const countDownDiv = document.getElementById('count-down')
-      countDownDiv?.querySelector('#count-down-span')?.remove()
-      countDownDiv?.insertAdjacentHTML(
-        'beforeend',
-        `<span id="count-down-span">剩余 ${timeLimit.value} 分钟</span>`
-      )
+      message.info({ content: `剩余 ${timeLimit.value} 分钟`, key: 'count_down_info', duration: 0 })
       if (timeLimit.value == 0) window.close()
     }, 1000 * 60)
     getExamItemList()

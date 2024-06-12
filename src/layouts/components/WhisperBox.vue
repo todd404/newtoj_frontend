@@ -28,7 +28,6 @@
 import { Message } from '@element-plus/icons-vue'
 import { computed, onMounted, ref } from 'vue'
 import { getUnreadWhisper, readAllWhisper, type UnreadWhisper } from '@/functions/WhisperFuntions'
-import { ElPopover } from 'element-plus'
 import UnreadWhisperList from '@/components/WhisperDialog/UnreadWhisperList.vue'
 import WhisperDialog from '@/components/WhisperDialog/WhisperDialog.vue'
 

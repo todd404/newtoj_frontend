@@ -2,6 +2,14 @@
   <ElPopover :disabled="popoverDisabled" trigger="hover">
     <div style="display: flex; flex-direction: column">
       <ElButton text @click="$router.push('/profile')">个人中心</ElButton>
+      <ElButton
+        v-if="userInfoStore.getUserInfo.value?.role != 'user'"
+        style="margin-left: 0px"
+        text
+        @click="$router.push(`/${userInfoStore.getUserInfo.value?.role}`)"
+      >
+        管理后台
+      </ElButton>
       <ElLink type="primary" @click.prevent="logout"> 退出 </ElLink>
     </div>
 
@@ -19,7 +27,7 @@
 <script setup lang="ts">
 import { useUserInfoStore } from '@/stores/userInfoStore'
 import axios from 'axios'
-import { ElAvatar, ElMessage, ElPopover } from 'element-plus'
+import { message } from 'ant-design-vue'
 defineProps({
   popoverDisabled: Boolean
 })
@@ -31,19 +39,13 @@ const logout = async () => {
   let body = res.data
 
   if (body.code == 200) {
-    ElMessage({
-      message: '成功退出',
-      type: 'success'
-    })
+    message.success('成功退出')
 
     userInfoStore.deleteToken()
     userInfoStore.deleteUserInfo()
     location.reload()
   } else {
-    ElMessage({
-      message: '退出失败',
-      type: 'error'
-    })
+    message.error('退出失败')
   }
 }
 </script>

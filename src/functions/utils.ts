@@ -1,15 +1,9 @@
-import { ElMessage } from 'element-plus'
+import { message } from 'ant-design-vue'
 
 export function showSuccessMessge(msg: string) {
-  ElMessage({
-    type: 'success',
-    message: msg
-  })
+  message.success(msg)
 }
 
 export function showErrorMessge(msg: string) {
-  ElMessage({
-    type: 'error',
-    message: msg
-  })
+  message.error(msg)
 }

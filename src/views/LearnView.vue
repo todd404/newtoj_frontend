@@ -1,7 +1,7 @@
 <template>
   <div style="padding: 0 10vw; width: 100%">
     <div style="display: flex; width: 100%; justify-content: space-between">
-      <img height="152px" :src="`http://localhost/file/cover/course/${courseId}.jpg`" />
+      <img height="152px" :src="`/file/cover/course/${courseId}.jpg`" />
       <div style="display: flex; flex-direction: column; justify-content: center">
         <ElText style="font-size: 32px">
           {{ courseInfo.title }}
@@ -50,6 +50,7 @@
 </template>
 
 <script setup lang="ts">
+import 'vue3-video-play/dist/style.css' // 引入css
 import { onBeforeMount, onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { VideoPlay, Document } from '@element-plus/icons-vue'
@@ -133,11 +134,11 @@ const addCourseEnroll = async () => {
 
 const onListItemClick = (file: CourseFile) => {
   if (file.fileType == 'video') {
-    videoSrc.value = `http://localhost/file/course_file/${courseId.value}/${file.file}`
+    videoSrc.value = `/file/course_file/${courseId.value}/${file.file}`
     videoDialogOpen.value = true
   } else {
     const link = document.createElement('a')
-    link.href = `http://localhost/file/course_file/${courseId.value}/${file.file}`
+    link.href = `/file/course_file/${courseId.value}/${file.file}`
     link.download = file.file
     link.click()
   }

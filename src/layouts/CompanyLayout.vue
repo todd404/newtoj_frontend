@@ -1,8 +1,8 @@
 <template>
-  <div class="teacher-layout">
+  <div class="company-layout">
     <ElContainer>
       <ElAside>
-        <h5 class="admin-menu-title">导师后台</h5>
+        <h5 class="admin-menu-title">企业后台</h5>
         <ElMenu router :default-active="$route.path" style="height: 100vh">
           <ElSubMenu index="problem">
             <template #title>
@@ -10,12 +10,12 @@
               <span>问题管理</span>
             </template>
 
-            <ElMenuItem index="/teacher/add-problem">
+            <ElMenuItem index="/company/add-problem">
               <ElIcon> <Plus /> </ElIcon>
               <span>添加编程问题</span>
             </ElMenuItem>
 
-            <ElMenuItem index="/teacher/add-choice-problem">
+            <ElMenuItem index="/company/add-choice-problem">
               <ElIcon> <Plus /> </ElIcon>
               <span>添加单选题集</span>
             </ElMenuItem>
@@ -27,31 +27,31 @@
               <span>测验管理</span>
             </template>
 
-            <ElMenuItem index="/teacher/add-exam">
+            <ElMenuItem index="/company/add-exam">
               <ElIcon> <Plus /> </ElIcon>
               <span>添加测验</span>
             </ElMenuItem>
 
-            <ElMenuItem index="/teacher/edit-exam">
+            <ElMenuItem index="/company/edit-exam">
               <ElIcon> <Edit /> </ElIcon>
               <span>测验管理</span>
             </ElMenuItem>
           </ElSubMenu>
 
-          <ElSubMenu index="course">
+          <ElSubMenu index="job">
             <template #title>
               <ElIcon><DataBoard /></ElIcon>
-              <span>课程管理</span>
+              <span>招聘管理</span>
             </template>
 
-            <ElMenuItem index="/teacher/add-course">
+            <ElMenuItem index="/company/add-job">
               <ElIcon> <Plus /> </ElIcon>
-              <span>添加课程</span>
+              <span>添加招聘</span>
             </ElMenuItem>
 
-            <ElMenuItem index="/teacher/edit-course">
+            <ElMenuItem index="/company/edit-job">
               <ElIcon> <Edit /> </ElIcon>
-              <span>编辑课程</span>
+              <span>编辑招聘</span>
             </ElMenuItem>
           </ElSubMenu>
         </ElMenu>

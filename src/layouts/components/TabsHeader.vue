@@ -70,7 +70,8 @@
 </template>
 
 <script setup lang="ts">
-import { ElMessage, type TabPaneName } from 'element-plus'
+import { type TabPaneName } from 'element-plus'
+import { message } from 'ant-design-vue'
 import { onMounted, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import HeaderAvatar from './HeaderAvatar.vue'
@@ -109,7 +110,7 @@ const onTabChange = (name: TabPaneName) => {
 const onAvatarClick = () => {
   if (isLogin.value) {
     //已登录
-    ElMessage('已登录')
+    message.info('已登录')
   } else {
     loginDialogOpen.value = true
   }

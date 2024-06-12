@@ -17,7 +17,7 @@
           :class="{ whisperSelectItemSelected: activeId == 1 }"
           @click="onWhisperSelectItemClick(1)"
         >
-          <ElAvatar :src="`http://localhost/file/avatar/1.png`" style="flex-shrink: 0"></ElAvatar>
+          <ElAvatar :src="`/file/avatar/1.png`" style="flex-shrink: 0"></ElAvatar>
           <div style="width: 52px; display: flex; flex-direction: column">
             <ElText truncated style="width: 52px">管理员</ElText>
             <ElText truncated style="width: 52px" type="info" size="small">{{
@@ -45,10 +45,7 @@
               :class="{ whisperSelectItemSelected: activeId == wh.userId }"
               @click="onWhisperSelectItemClick(wh.userId)"
             >
-              <ElAvatar
-                :src="`http://localhost/file/avatar/${wh.userId}.png`"
-                style="flex-shrink: 0"
-              ></ElAvatar>
+              <ElAvatar :src="`/file/avatar/${wh.userId}.png`" style="flex-shrink: 0"></ElAvatar>
               <div style="width: 52px; display: flex; flex-direction: column">
                 <ElText truncated style="width: 52px">{{ wh.nickname }}</ElText>
                 <ElText truncated style="width: 52px" type="info" size="small">{{
@@ -86,7 +83,7 @@
 
 <script setup lang="ts">
 import { onMounted, reactive, ref } from 'vue'
-import { ElMessage } from 'element-plus'
+import { message } from 'ant-design-vue'
 import { sendWhisper, type Whisper } from '@/functions/WhisperFuntions'
 import axios from 'axios'
 import type { ResponseResult } from '@/functions/ResponseResult'
@@ -168,10 +165,7 @@ const onWhisperSelectItemClick = (id: number) => {
 
 const onSendButtonClick = async () => {
   if (whisperContent.value == '') {
-    ElMessage({
-      type: 'error',
-      message: '不能发送空白内容'
-    })
+    message.error('不能发送空白内容')
 
     return
   }

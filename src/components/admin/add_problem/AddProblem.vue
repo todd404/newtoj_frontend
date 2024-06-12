@@ -45,7 +45,6 @@
 </template>
 
 <script setup lang="ts">
-import { ElCollapse } from 'element-plus'
 import AddProblemContent from './AddProblemContent.vue'
 import AddProblemArgs, { type PRBConfig, type ProblemArgs } from './AddProblemArgs.vue'
 import AddProblemCase, {

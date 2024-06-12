@@ -71,7 +71,7 @@ import { reactive, ref } from 'vue'
 
 const userInfoStore = useUserInfoStore()
 const userInfo = userInfoStore.getUserInfo.value
-const imageUrl = ref(`http://localhost/file/avatar/${userInfo?.userId}.png`)
+const imageUrl = ref(`/file/avatar/${userInfo?.userId}.png`)
 
 interface ProfileForm {
   nickname: string
@@ -152,7 +152,7 @@ const handleUploadSuccess = (res: { code: number; msg: string }) => {
   } else {
     showSuccessMessge('上传头像成功')
     //使用一个时间戳作为参数，让浏览器以为不是同一张图片
-    imageUrl.value = `http://localhost/file/avatar/${userInfo?.userId}.png?res=${new Date().getTime()}`
+    imageUrl.value = `/file/avatar/${userInfo?.userId}.png?res=${new Date().getTime()}`
   }
 }
 </script>

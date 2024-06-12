@@ -15,7 +15,7 @@
   <div style="display: flex; flex-direction: column; padding: 0 10vw; gap: 10px">
     <template v-for="(job, index) of showJobList" :key="`job-${index}`">
       <ElCard body-style="display: flex; align-items: center;">
-        <img width="48x" height="48px" :src="`http://localhost/file/cover/job/${job.id}.jpg`" />
+        <img width="48x" height="48px" :src="`http:///file/cover/job/${job.id}.jpg`" />
         <div style="display: flex; flex-direction: column; margin-left: 16px; flex-grow: 1">
           <ElText style="width: 100%">{{ job.title }}</ElText>
           <ElText type="info" style="width: 100%">{{ job.require }}</ElText>

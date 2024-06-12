@@ -12,13 +12,14 @@
 </template>
 
 <script setup lang="ts">
+import 'undraw-ui/dist/style.css'
 import emoji from '@/assets/emoji'
 import { getAllComments, likeComment, submitComment } from '@/functions/CommentFunctions'
 import type { ResponseResult } from '@/functions/ResponseResult'
 import { showErrorMessge } from '@/functions/utils'
 import { useUserInfoStore } from '@/stores/userInfoStore'
 import axios from 'axios'
-import { ElMessage } from 'element-plus'
+import { message } from 'ant-design-vue'
 import { UComment, type ConfigApi, type SubmitParamApi } from 'undraw-ui'
 import { onMounted, reactive, ref } from 'vue'
 import WhisperDialog from '../WhisperDialog/WhisperDialog.vue'
@@ -38,7 +39,7 @@ const config = reactive<ConfigApi>({
     username: userInfoStore.getUserInfo.value?.nickname
       ? userInfoStore.getUserInfo.value?.nickname
       : '未登录',
-    avatar: `http://localhost/file/avatar/${userInfoStore.getUserInfo.value?.userId}.png`,
+    avatar: `/file/avatar/${userInfoStore.getUserInfo.value?.userId}.png`,
     likeIds: []
   },
   showAddress: false,
@@ -77,7 +78,7 @@ const submit = async ({ content, parentId, files, finish }: SubmitParamApi) => {
   })
 
   finish(comment)
-  ElMessage({ type: 'success', message: '评论成功' })
+  message.success('评论成功')
 }
 
 // 点赞按钮事件 将评论id返回后端判断是否点赞，然后在处理点赞状态

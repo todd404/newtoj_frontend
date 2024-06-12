@@ -24,15 +24,7 @@
 import { refreshAxiosToken } from '@/functions/UserFuntions'
 import { useUserInfoStore } from '@/stores/userInfoStore'
 import axios from 'axios'
-import {
-  ElDialog,
-  ElForm,
-  ElFormItem,
-  ElInput,
-  ElMessage,
-  type FormInstance,
-  type FormRules
-} from 'element-plus'
+import { type FormInstance, type FormRules } from 'element-plus'
 import { reactive, ref } from 'vue'
 import RegisterDialog from './RegisterDialog.vue'
 import { showErrorMessge, showSuccessMessge } from '@/functions/utils'

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import type { ResponseResult } from './ResponseResult'
-import { ElMessage } from 'element-plus'
+import { message } from 'ant-design-vue'
 import { useUserInfoStore } from '@/stores/userInfoStore'
 
 export interface Whisper {
@@ -41,16 +41,10 @@ export async function sendWhisper(whisper: Whisper): Promise<boolean> {
   const res = await axios.post('/api/send-whisper', whisper)
   const data: ResponseResult = res.data
   if (data.code == 200) {
-    ElMessage({
-      type: 'success',
-      message: '私信发送成功'
-    })
+    message.success('私信发送成功')
     return true
   } else {
-    ElMessage({
-      type: 'error',
-      message: '私信发送失败'
-    })
+    message.success('私信发送失败')
     return false
   }
 }
